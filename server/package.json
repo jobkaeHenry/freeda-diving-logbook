@@ -1,0 +1,18 @@
+{
+  "name": "freeda-diving-logbook",
+  "version": "1.0.0",
+  "main": "app.js",
+
+  "author": "Jungu Lee <1zzangjun@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "start": "nodemon app.js"
+  },
+  "dependencies": {
+    "body-parser": "^1.20.1",
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  }
+}
