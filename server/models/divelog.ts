@@ -11,7 +11,7 @@ const divLogSchema = new Schema({
   },
   weather: {
     waterTemp: { type: Number, require: false },
-    airtemp: { type: Number, require: false },
+    airTemp: { type: Number, require: false },
     weather: { type: String, require: false },
     visibility: { type: String, require: false },
   },

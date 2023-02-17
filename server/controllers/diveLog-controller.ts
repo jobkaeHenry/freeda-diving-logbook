@@ -8,6 +8,8 @@ export const createDiveLog = async (
   next: NextFunction
 ) => {
   const { diveType, location, weather, diveInfo, gear, personal } = req.body;
+  //express-validator 추가하기
+
   const createdDiveLog = new DiveLog({
     author: "임시크리에이터",
     diveType,
