@@ -16,7 +16,7 @@ const divLogSchema = new Schema({
     visibility: { type: String, require: false },
   },
   diveInfo: {
-    dept: {
+    depth: {
       average: { type: Number, require: true },
       max: { type: Number, require: true },
     },
