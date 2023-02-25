@@ -2,12 +2,17 @@ import useFetch from "@/hooks/useFetch";
 import axios from "axios";
 
 const BASE_URL = process.env.REACT_APP_BASE_URL;
+
 axios.defaults.xsrfCookieName = "csrftoken";
 axios.defaults.xsrfHeaderName = "x-CSRFToken";
+axios.defaults.baseURL = "http://localhost:5000";
+
+if (process.env.NODE_DEV === "production") {
+  axios.defaults.baseURL = BASE_URL;
+}
 
 /**쿠키를 싣고가야하는 요청 axios */
 export const axiosPrivate = axios.create({
-  baseURL: BASE_URL,
   headers: {
     "Content-Type": "application/json",
   },
@@ -15,6 +20,5 @@ export const axiosPrivate = axios.create({
 });
 
 export default axios.create({
-  baseURL: BASE_URL,
   headers: { "Content-Type": "application/json" },
 });

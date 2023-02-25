@@ -1,4 +1,4 @@
-import { refreshTokenURL } from "@/data/URL/Authentication/refreshToken";
+import { refreshTokenURL } from "@/data/URL/server/Authentication/refreshToken";
 import axios from "@/lib/api/axios";
 import { getLS, removeLS } from "@/utils/localStorage";
 

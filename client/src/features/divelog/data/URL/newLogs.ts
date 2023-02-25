@@ -1,0 +1,1 @@
+export const getDiveLog = "/divelog" as const

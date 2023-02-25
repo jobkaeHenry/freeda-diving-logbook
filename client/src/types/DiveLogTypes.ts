@@ -1,9 +1,13 @@
-export interface DiveLog {
+export interface ServerSideDiveLogType extends DiveLogTypes {
   id: number;
   author: number;
-  type: "scuba" | "free";
+}
+
+export interface DiveLogTypes {
+  diveType: "scuba" | "free";
   location: LocationInfo;
-  weatherInfo: WeatherInterface;
+  weather: WeatherInterface;
+
   diveInfo: {
     depth: {
       average: number;
@@ -25,8 +29,8 @@ export interface DiveLog {
   };
   personal: {
     waterTemp: "warm" | "cold" | "hot";
-    content: string;
-    image: File;
+    content: string|undefined;
+    image: File|undefined;
   };
 }
 
