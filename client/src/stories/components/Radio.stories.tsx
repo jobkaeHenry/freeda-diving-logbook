@@ -1,6 +1,6 @@
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
-import Radio from "../../components/Radio";
+import Radio from "../../components/atom/Radio";
 import MobileWrapper from "../../layouts/MobileWrapper";
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export

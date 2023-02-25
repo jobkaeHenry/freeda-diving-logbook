@@ -22,6 +22,7 @@ const Navbar = (props: Props) => {
 const NavWrapper = styled.nav`
   position: fixed;
   top: 0;
+  left: 0;
   width: 100%;
   padding: 14px 16px;
   display: flex;

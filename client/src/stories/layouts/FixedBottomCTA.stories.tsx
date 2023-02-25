@@ -2,8 +2,8 @@ import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
 import FixedBottomCTA from "../../layouts/FixedBottomCTA";
-import { Button } from "../../components/Button";
-import Icon from "../../components/Icon";
+import { Button } from "../../components/atom/Button";
+import Icon from "../../components/atom/Icon";
 import rightArrow from "../../assets/rightArrow.svg";
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
