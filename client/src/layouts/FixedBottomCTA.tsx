@@ -7,12 +7,14 @@ type Props = {
 
 const FixedBottomCTA = (props: Props) => {
   const { children } = props;
+
   return (
     <Wrapper>
       {Array.isArray(children)
-        ? children.map((elem) => {
+        ? children.map((elem, inedx) => {
             return cloneElement(elem, {
-              type: "button",
+              type: elem.props.type ? elem.props.type : "button",
+              key: inedx,
             });
           })
         : cloneElement(children, { type: "button" })}
@@ -25,6 +27,7 @@ export default FixedBottomCTA;
 const Wrapper = styled.div`
   position: fixed;
   bottom: 0;
+  left: 0;
   padding: 8px;
   width: 100%;
   display: flex;
