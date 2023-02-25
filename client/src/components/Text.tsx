@@ -5,7 +5,7 @@ interface TextProps
     React.ButtonHTMLAttributes<HTMLSpanElement>,
     HTMLSpanElement
   > {
-  typography: "h1" | "h2" | "h3" | "p";
+  typography: "h1" | "h2" | "h3" | "h4"| "p" | "sub";
   bold?: boolean;
   align?: string;
   color?: string;

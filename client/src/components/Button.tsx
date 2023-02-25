@@ -1,24 +1,25 @@
 import styled from "@emotion/styled";
 
-interface ButtonProps
-  extends React.DetailedHTMLProps<
-    React.ButtonHTMLAttributes<HTMLButtonElement>,
-    HTMLButtonElement
-  > {
+type ButtonType = React.DetailedHTMLProps<
+  React.ButtonHTMLAttributes<HTMLButtonElement>,
+  HTMLButtonElement
+>;
+
+interface ButtonProps extends ButtonType {
   width?: string;
-  disabled?:boolean | undefined
-  rounded?:boolean | undefined
+  disabled?: boolean | undefined;
+  rounded?: boolean | undefined;
 }
 
 export const Button = styled.button`
   display: flex;
   gap: 8px;
   justify-content: center;
+  font-size: var(--h4);
   align-items: center;
   padding: 12px 16px;
   border-radius: ${(props: ButtonProps) => (props.rounded ? "100px" : `8px`)};
   width: ${(props: ButtonProps) => (props.width ? props.width : `100%`)};
-
   background-color: ${(props: ButtonProps) =>
     props.disabled ? `var(--bg-gray)` : `var(--main)`};
   color: var(--pure-white);
@@ -31,4 +32,4 @@ export const Button = styled.button`
   }
 `;
 
-export const LinkButton = Button.withComponent('a')
+export const LinkButton = Button.withComponent("a");

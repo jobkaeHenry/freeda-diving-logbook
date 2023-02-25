@@ -21,17 +21,18 @@ interface Props
 
 const Radio = (props: Props) => {
   const { children, ...otherProps } = props;
-  const [value, setValue] = useState(
-    props.defaultValue ? props.defaultValue : props.children[0].props.value
-  );
+  const [value, setValue] = useState(props.defaultValue);
 
+  const uncontrolled = props.value == null;
   return (
     <ControlledRadio
       {...otherProps}
-      value={value}
+      value={uncontrolled ? value : props.value}
       onChange={(event) => {
         props.onChange?.(event);
-        setValue(event.target.value);
+        if (uncontrolled) {
+          setValue(event.target.value);
+        }
       }}
     >
       {children}
@@ -93,7 +94,6 @@ const RadioOption = ({
 
 const LabelWrapper = styled.div`
   width: 100%;
-
 
   & label {
     display: flex;

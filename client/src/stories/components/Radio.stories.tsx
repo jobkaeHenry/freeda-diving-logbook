@@ -5,7 +5,7 @@ import MobileWrapper from "../../layouts/MobileWrapper";
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
-  title: "Compontens/Radio",
+  title: "Components/Radio",
   component: Radio,
   // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
 } as ComponentMeta<typeof Radio>;
