@@ -2,8 +2,7 @@
 import { Button } from "@/components/atom/Button";
 import Navbar from "@/components/Navbar/Navbar";
 import FixedBottomCTA from "@/layouts/FixedBottomCTA";
-
-import React, { FormEvent, MouseEventHandler, useState } from "react";
+import { FormEvent, useState } from "react";
 import PaddingLayout from "@/features/newlogs/layout/PaddingLayout";
 import DiveTypeForm from "@/features/newlogs/pages/DiveTypeForm";
 import useMultistepForm from "@/hooks/useMultistepForm";
@@ -30,15 +29,7 @@ const DiveForm = (props: Props) => {
     });
   };
 
-  const {
-    step,
-    currentIndex,
-    isFirstStep,
-    next,
-    back,
-    totalPageNum,
-    isLastStep,
-  } = useMultistepForm([
+  const { step, isFirstStep, next, back, isLastStep } = useMultistepForm([
     <DiveTypeForm {...data} updateFields={updateField} />,
     <LocationForm {...data} updateFields={updateField} />,
     <DepthForm {...data} updateFields={updateField} />,
@@ -50,7 +41,6 @@ const DiveForm = (props: Props) => {
   const onSubmit = (e: FormEvent) => {
     e.preventDefault();
     if (isLastStep) {
-      console.log(data);
       axiosPrivate.post(createLog, data).then((res) => {
         console.log(res);
         router.replace(`/${getDiveLog}/${res.data.id}`);
@@ -76,7 +66,7 @@ const DiveForm = (props: Props) => {
               <></>
             )}
             <Button type="submit" rounded>
-              다음
+              {isLastStep ? "완료" : "다음"}
             </Button>
           </FixedBottomCTA>
         </form>
