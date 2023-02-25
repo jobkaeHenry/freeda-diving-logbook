@@ -6,20 +6,27 @@ import mongoose from "mongoose";
 import authChecker from "./controllers/check-auth";
 import dotenv from "dotenv";
 import diveLogRoute from "./routers/diveLogRoute";
+import cors from 'cors'
+
 // 환경변수사용
 dotenv.config();
 const mongoDB_PW = process.env.MONGO_DB_PW;
 // express
 const app = express();
-app.use(bodyParser.json());
 // 헬맷 설정 필요
 app.use(helmet());
+app.use(bodyParser.json());
+app.use(cors({
+  origin: "http://localhost:3000",
+  credentials: true,
+  methods: ["GET", "POST"],
+}));
 
 // 오픈된 라우팅
 app.use("/divelog", diveLogRoute);
 
 // 보호된 라우팅 - authCheck
-app.use(authChecker);
+// app.use(authChecker);
 app.use("/user", userRouter);
 
 mongoose
