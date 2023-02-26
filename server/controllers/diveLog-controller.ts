@@ -9,6 +9,7 @@ export const createDiveLog = async (
 ) => {
   const { diveType, location, weather, diveInfo, personal } = req.body;
   //express-validator 추가하기
+  // if (diveType === "scuba") {
   const createdDiveLog = new DiveLog({
     author: "임시크리에이터",
     diveType,
@@ -25,6 +26,7 @@ export const createDiveLog = async (
     return next(error);
   }
   res.status(201).json({ id: createdDiveLog.toObject({ getters: true })._id });
+  // }
 };
 
 export const getDiveLogById = async (
