@@ -1,5 +1,6 @@
 import Text from "@/components/atom/Text";
 import { DiveLogTypes } from "@/types/DiveLogTypes";
+import { useTranslation } from "next-i18next";
 import FormLayout from "../layout/FormLayout";
 
 type Props = Pick<DiveLogTypes, "diveInfo"> & {
@@ -7,13 +8,13 @@ type Props = Pick<DiveLogTypes, "diveInfo"> & {
 };
 
 const GearForm = ({diveInfo}: Props) => {
-
+  const {t} = useTranslation(['diveForm','common'])
   return (
     <FormLayout>
       {/* 타이틀 */}
       <FormLayout.Title>
         <Text typography="h1" bold as={"h1"}>
-          어떤 장비를 사용하셨나요?
+          {t("어떤 장비를 사용하셨나요?")}
         </Text>
       </FormLayout.Title>
       {/* 메인 */}

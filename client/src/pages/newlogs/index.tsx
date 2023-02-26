@@ -17,12 +17,32 @@ import { axiosPrivate } from "@/lib/api/axios";
 import { createLog } from "@/features/newlogs/data/URL/newLogs";
 import { useRouter } from "next/router";
 import { getDiveLog } from "@/data/URL/local/divelog/url";
+import { GetStaticPropsContext } from "next";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { useTranslation } from "next-i18next";
 
-type Props = {};
+export async function getStaticProps(context: GetStaticPropsContext) {
+  const locale = context.locale;
+  return {
+    props: {
+      ...(await serverSideTranslations(locale ? locale : "ko", [
+        "common",
+        "diveForm",
+      ])),
+    },
+  };
+}
+
+type Props = {
+  locale: "ko" | "en";
+};
 
 const DiveForm = (props: Props) => {
   const [data, setData] = useState(scubaDiveModel);
   const router = useRouter();
+
+  const {t} = useTranslation()
+
   const updateField = (field: Partial<DiveLogTypes>) => {
     setData((prev) => {
       return { ...prev, ...field };
@@ -30,12 +50,12 @@ const DiveForm = (props: Props) => {
   };
 
   const { step, isFirstStep, next, back, isLastStep } = useMultistepForm([
-    <DiveTypeForm {...data} updateFields={updateField} />,
-    <LocationForm {...data} updateFields={updateField} />,
-    <DepthForm {...data} updateFields={updateField} />,
-    <AirUsageForm {...data} updateFields={updateField} />,
-    <GearForm {...data} updateFields={updateField} />,
-    <PersonalForm {...data} updateFields={updateField} />,
+    <DiveTypeForm {...data} {...props} updateFields={updateField} />,
+    <LocationForm {...data} {...props} updateFields={updateField} />,
+    <DepthForm {...data} {...props} updateFields={updateField} />,
+    <AirUsageForm {...data} {...props} updateFields={updateField} />,
+    <GearForm {...data} {...props} updateFields={updateField} />,
+    <PersonalForm {...data} {...props} updateFields={updateField} />,
   ]);
 
   const onSubmit = (e: FormEvent) => {
@@ -48,7 +68,6 @@ const DiveForm = (props: Props) => {
     }
     next();
   };
-
   return (
     <>
       <Navbar />
@@ -56,17 +75,18 @@ const DiveForm = (props: Props) => {
         <form onSubmit={onSubmit}>
           {/* 실제 폼 */}
           {step}
+
           {/* 버튼 */}
           <FixedBottomCTA>
             {!isFirstStep ? (
               <Button rounded className="ghost" onClick={back}>
-                이전
+                {t("이전")}
               </Button>
             ) : (
               <></>
             )}
             <Button type="submit" rounded>
-              {isLastStep ? "완료" : "다음"}
+              {isLastStep ? t("완료") : t("다음")}
             </Button>
           </FixedBottomCTA>
         </form>

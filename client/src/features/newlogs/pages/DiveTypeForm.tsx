@@ -1,8 +1,7 @@
 import Radio from "@/components/atom/Radio";
 import Text from "@/components/atom/Text";
 import { DiveLogTypes } from "@/types/DiveLogTypes";
-import { ValueOf } from "next/dist/shared/lib/constants";
-import React, { ChangeEvent, useState } from "react";
+import { useTranslation } from "next-i18next";
 import FormLayout from "../layout/FormLayout";
 
 type Props = Pick<DiveLogTypes, "diveType"> & {
@@ -10,12 +9,14 @@ type Props = Pick<DiveLogTypes, "diveType"> & {
 };
 
 const DiveTypeForm = (props: Props) => {
+  const { t } = useTranslation(["diveForm", "common"]);
+
   return (
     <FormLayout>
       {/* 타이틀 */}
       <FormLayout.Title>
         <Text typography="h1" bold as={"h1"}>
-          어떤 활동을 하셨나요?
+          {t("어떤 활동을 하셨나요?")}
         </Text>
       </FormLayout.Title>
       {/* 메인 */}
@@ -28,8 +29,8 @@ const DiveTypeForm = (props: Props) => {
           }}
           value={props.diveType}
         >
-          <Radio.Option value={"scuba"}>스쿠버다이빙</Radio.Option>
-          <Radio.Option value={"free"}>프리다이빙</Radio.Option>
+          <Radio.Option value={"scuba"}>{t("common:스쿠버다이빙")}</Radio.Option>
+          <Radio.Option value={"free"}>{t("common:프리다이빙")}</Radio.Option>
         </Radio>
       </FormLayout.Main>
     </FormLayout>
