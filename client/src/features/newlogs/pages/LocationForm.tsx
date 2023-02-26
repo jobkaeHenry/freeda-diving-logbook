@@ -1,11 +1,14 @@
 import Radio from "@/components/atom/Radio";
 import Text from "@/components/atom/Text";
 import TextInput from "@/components/atom/TextInput";
-import SearchIcon from '../../../assets/searchIcon.svg'
+import SearchIcon from "../../../assets/searchIcon.svg";
 import { DiveLogTypes } from "@/types/DiveLogTypes";
 import { useTranslation } from "react-i18next";
 import FormLayout from "../layout/FormLayout";
 import { WeatherTypeGuard } from "../utils/typeguard";
+import useModal from "@/hooks/useModal";
+import { Button } from "@/components/atom/Button";
+import { Modal } from "@/components/GlobalModal/Modal";
 
 type Props = Pick<DiveLogTypes, "location"> &
   Pick<DiveLogTypes, "weather"> & {
@@ -16,6 +19,7 @@ type Props = Pick<DiveLogTypes, "location"> &
 
 const LocationForm = ({ location, weather, updateFields }: Props) => {
   const { t } = useTranslation(["diveForm", "common"]);
+  const onClickModal = useModal();
   return (
     <FormLayout>
       {/* 타이틀 */}
@@ -26,17 +30,23 @@ const LocationForm = ({ location, weather, updateFields }: Props) => {
       </FormLayout.Title>
       {/* 메인 */}
       <FormLayout.Main>
+        <Modal/>
         <TextInput
           icon={SearchIcon}
           type="text"
           required
           placeholder={t("common:검색하기") || "Search"}
           defaultValue={location.title}
-          onClick={() => {}}
+          onClick={() => onClickModal(<div>안녕</div>)}
           // onChange={(e) =>
           //   updateFields({ location: { ...location, title: e.target.value } })
           // }
         />
+        <Button
+          type="button"
+          onClick={() => {
+            onClickModal(<div>안녕</div>)}}
+        ></Button>
         <Radio
           value={weather.weather}
           onChange={(e) => {

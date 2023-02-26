@@ -23,6 +23,7 @@ const TextInput = (props: Props) => {
             position: absolute;
             right: 8px;
           `}
+          onClick={props.onClick}
         />
       ) : (
         <></>
