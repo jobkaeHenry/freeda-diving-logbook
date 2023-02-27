@@ -18,7 +18,7 @@ const Template: ComponentStory<typeof FixedBottomCTA> = (args) => (
   <FixedBottomCTA {...args}>
     <Button className="ghost">버튼1</Button>
     <Button>
-      <span>버튼2</span>
+      버튼2
       <Icon url={rightArrow}/>
     </Button>
   </FixedBottomCTA>
