@@ -7,6 +7,7 @@ interface TextProps
   > {
   typography: "h1" | "h2" | "h3" | "h4"| "p" | "sub";
   bold?: boolean;
+  weight?:string;
   align?: string;
   color?: string;
 }
@@ -17,6 +18,7 @@ const Text = styled.span`
   color: ${(props: TextProps) => (props.color ? `${props.color}` : "")};
   font-size: ${(props: TextProps) => `var(--${props.typography})`};
   font-weight: ${(props: TextProps) => (props.bold ? "var(--bold)" : null)};
+  font-weight: ${(props: TextProps) => (props.weight ? props.weight : "")};
   word-break: keep-all;
 `;
 

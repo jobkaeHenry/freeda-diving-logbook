@@ -1,22 +1,23 @@
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 import React, { InputHTMLAttributes } from "react";
-import Icon from "./Icon";
+
 
 interface Props extends InputHTMLAttributes<HTMLInputElement> {
   icon?: any;
+  width?: string;
 }
 
 const TextInput = (props: Props) => {
   const Icon = props.icon;
   return (
-    <InputWrapper css={css`position:relative;`}>
-      <Input
-        css={css`
-          padding-right: 32px;
-        `}
-        {...props}
-      />
+    <InputWrapper
+      css={css`
+        position: relative;
+        width: ${props.width};
+      `}
+    >
+      <Input type={"text"} {...props} />
       {Icon ? (
         <Icon
           css={css`
@@ -33,7 +34,7 @@ const TextInput = (props: Props) => {
 };
 
 const Input = styled.input`
-  &[type="text"] {
+  &{
     padding: 16px;
     padding-right: ${(props: Props) => (props.icon ? "48px" : "")};
     outline-style: solid;
@@ -44,11 +45,11 @@ const Input = styled.input`
     resize: none;
     accent-color: var(--main);
   }
-  &[type="text"]:disabled {
+  &:disabled {
     background-color: #eee;
     color: var(--font-light-gray);
   }
-  &[type="text"]:focus {
+  &:focus {
     filter: drop-shadow(0px 0px 2px var(--main));
     color: var(--font-main);
   }

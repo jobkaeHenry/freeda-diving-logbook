@@ -8,7 +8,7 @@
   font-weight: inherit;
   text-decoration: none;
   letter-spacing: 0;
-  white-space: normal;
+  white-space: pre-line;
   word-break: break-all;
   object-fit: contain;
   list-style: none;
@@ -23,20 +23,20 @@ p {
   color: var(--font-black);
 }
 :root {
-  --main: #82BCDB;
+  --main: #82bcdb;
   --sub-color: #eab64d;
-  
+
   --alert-green: #31a215;
   --alert-amber: #ef8523;
   --alert-red: #f14646;
 
-  --font-main: #558C99;
-  --font-black: #3D4A59;
-  --font-gray: #6D7A89;
+  --font-main: #558c99;
+  --font-black: #3d4a59;
+  --font-gray: #6d7a89;
   --font-light-gray: #b4b4b4;
 
-  --bg-gray: #D8DEDE;
-  --bg-light :#E9F3F3;
+  --bg-gray: #d8dede;
+  --bg-light: #e9f3f3;
 
   --pure-white: #ffffff;
   --line-black: #777777;
@@ -44,15 +44,15 @@ p {
 
   --bold: 700;
   --medium: 500;
+  --regular: 400;
   --light: 200;
 
-
   --h1: 1.5rem;
-  --h2:1.375rem;
-  --h3:1.25rem;
-  --h4:1.125rem;
+  --h2: 1.375rem;
+  --h3: 1.25rem;
+  --h4: 1.125rem;
   --p: 1rem;
-  --sub:0.875rem;
+  --sub: 0.875rem;
 }
 
 a,
@@ -69,7 +69,6 @@ textarea {
 button {
   cursor: pointer;
 }
-
 
 a.active {
   color: var(--main);
