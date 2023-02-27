@@ -2,7 +2,7 @@
 import { Button } from "@/components/atom/Button";
 import Navbar from "@/components/Navbar/Navbar";
 import FixedBottomCTA from "@/layouts/FixedBottomCTA";
-import { FormEvent, useState } from "react";
+import { FormEvent, useCallback, useState } from "react";
 import PaddingLayout from "@/features/newlogs/layout/PaddingLayout";
 import DiveTypeForm from "@/features/newlogs/pages/DiveTypeForm";
 import useMultistepForm from "@/hooks/useMultistepForm";
@@ -41,13 +41,16 @@ const DiveForm = (props: Props) => {
   const [data, setData] = useState(scubaDiveModel);
   const router = useRouter();
 
-  const {t} = useTranslation()
+  const { t } = useTranslation();
 
-  const updateField = (field: Partial<DiveLogTypes>) => {
-    setData((prev) => {
-      return { ...prev, ...field };
-    });
-  };
+  const updateField = useCallback(
+    (field: Partial<DiveLogTypes>) => {
+      setData((prev) => {
+        return { ...prev, ...field };
+      });
+    },
+    []
+  );
 
   const { step, isFirstStep, next, back, isLastStep } = useMultistepForm([
     <DiveTypeForm {...data} {...props} updateFields={updateField} />,
