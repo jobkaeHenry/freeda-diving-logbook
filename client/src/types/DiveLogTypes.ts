@@ -11,6 +11,11 @@ export interface DiveLogTypes {
   weatherInfo: WeatherInterface;
 
   diveInfo: {
+    time: {
+      in: string,
+      out: string,
+      date: string,
+    },
     depth: {
       average: number;
       max: number;

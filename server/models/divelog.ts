@@ -5,17 +5,22 @@ const divLogSchema = new Schema({
   diveType: { type: String, require: true },
   location: {
     title: { type: String, required: true },
-    address: { type: String, required: true },
-    lng: { type: Number, required: true },
-    lat: { type: Number, required: true },
+    address: { type: String, required: false },
+    lng: { type: Number, required: false },
+    lat: { type: Number, required: false },
   },
   weatherInfo: {
-    waterTemp: { type: Number, require: false },
-    airTemp: { type: Number, require: false },
-    weather: { type: String, require: false },
-    visibility: { type: String, require: false },
+    waterTemp: { type: Number, require: true },
+    airTemp: { type: Number, require: true },
+    weather: { type: String, require: true },
+    visibility: { type: String, require: true },
   },
   diveInfo: {
+    time: {
+      in: { type: String, require: true },
+      out: { type: String, require: true },
+      date: { type: String, require: false },
+    },
     depth: {
       average: { type: Number, require: true },
       max: { type: Number, require: true },

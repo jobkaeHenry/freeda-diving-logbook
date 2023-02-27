@@ -10,6 +10,11 @@ const scubaDiveModel: DiveLogTypes = {
     visibility: "good",
   },
   diveInfo: {
+    time: {
+      in: "",
+      out: "",
+      date: "",
+    },
     depth: {
       average: 15,
       max: 25,
