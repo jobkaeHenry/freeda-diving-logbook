@@ -20,6 +20,7 @@ export const Modal = () => {
             e.stopPropagation();
           }}
         >
+          {/* <Button onClick={() => setIsModalOpen((prev) => !prev)} /> */}
           {modalElem}
         </ModalWrapper>
       </ModalBackDrop>
@@ -27,10 +28,9 @@ export const Modal = () => {
   ) : null;
 };
 const ModalWrapper = styled.div`
-  max-width: 100%;
-  min-width: 50%;
-  min-height: 50%;
-  max-height: 100%;
+  width: 80vw;
+  height: 80vh;
+  position: relative;
   padding: 16px;
   background-color: var(--pure-white);
   border-radius: 8px;
