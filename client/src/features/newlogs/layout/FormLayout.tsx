@@ -12,6 +12,7 @@ const FormLayout = (props: Props) => {
 };
 
 FormLayout.Title = SectionHeading;
+
 FormLayout.Main = styled.main`
   display: flex;
   width: 100%;

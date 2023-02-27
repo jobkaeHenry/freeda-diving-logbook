@@ -9,15 +9,17 @@ import { WeatherTypeGuard } from "../utils/typeguard";
 import useModal from "@/hooks/useModal";
 import { Modal } from "@/components/GlobalModal/Modal";
 import LocationModal from "../components/LocationModal";
+import InputWithLabel from "../components/InputWithLabel";
+import { RowWrapper } from "../layout/Wrapper";
 
 type Props = Pick<DiveLogTypes, "location"> &
-  Pick<DiveLogTypes, "weather"> & {
+  Pick<DiveLogTypes, "weatherInfo"> & {
     updateFields: (
-      field: Pick<DiveLogTypes, "location"> | Pick<DiveLogTypes, "weather">
+      field: Pick<DiveLogTypes, "location"> | Pick<DiveLogTypes, "weatherInfo">
     ) => void;
   };
 
-const LocationForm = ({ location, weather, updateFields }: Props) => {
+const LocationForm = ({ location, weatherInfo, updateFields }: Props) => {
   const { t } = useTranslation(["diveForm", "common"]);
   const onClickModal = useModal();
   return (
@@ -30,32 +32,44 @@ const LocationForm = ({ location, weather, updateFields }: Props) => {
       </FormLayout.Title>
       {/* 메인 */}
       <FormLayout.Main>
-        <Modal/>
+        <Modal />
         <TextInput
           icon={SearchIcon}
           type="text"
           required
           placeholder={t("common:검색하기") || "Search"}
           defaultValue={location.title}
-          onClick={() => onClickModal(<LocationModal currentValue={location.title}/>)}
+          onClick={() =>
+            onClickModal(<LocationModal currentValue={location.title} />)
+          }
           // onChange={(e) =>
           //   updateFields({ location: { ...location, title: e.target.value } })
           // }
         />
         <Radio
-          value={weather.weather}
+          value={weatherInfo.weather}
           onChange={(e) => {
             updateFields({
-              weather: { ...weather, weather: WeatherTypeGuard(e) },
+              weatherInfo: { ...weatherInfo, weather: WeatherTypeGuard(e) },
             });
           }}
         >
-          <Radio.Option value={"sun"}>{t("맑음")}</Radio.Option>
-          <Radio.Option value={"fog"}>{t("흐림")}</Radio.Option>
-          <Radio.Option value={"rain"}>{t("비")}</Radio.Option>
-          <Radio.Option value={"snow"}>{t("눈")}</Radio.Option>
+          <Radio.Option value={"sun"}>{t("common:맑음")}</Radio.Option>
+          <Radio.Option value={"fog"}>{t("common:흐림")}</Radio.Option>
+          <Radio.Option value={"rain"}>{t("common:비")}</Radio.Option>
+          <Radio.Option value={"snow"}>{t("common:눈")}</Radio.Option>
         </Radio>
-        
+
+        <RowWrapper>
+          <InputWithLabel type={"time"} label={t("common:입수시간")} inputWidth={"100%"}/>
+          <InputWithLabel type={"time"} label={t("common:출수시간")} inputWidth={"100%"}/>
+        </RowWrapper>
+
+        <RowWrapper>
+          <InputWithLabel type={"number"} label={`${t("common:수온")}`} unit="℃" defaultValue={weatherInfo.waterTemp}/>
+          <InputWithLabel type={"number"} label={`${t("common:기온")}`} unit="℃" defaultValue={weatherInfo.airTemp}/>
+        </RowWrapper>
+
       </FormLayout.Main>
     </FormLayout>
   );

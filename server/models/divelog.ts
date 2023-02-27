@@ -6,10 +6,10 @@ const divLogSchema = new Schema({
   location: {
     title: { type: String, required: true },
     address: { type: String, required: true },
-    lan: { type: Number, required: true },
+    lng: { type: Number, required: true },
     lat: { type: Number, required: true },
   },
-  weather: {
+  weatherInfo: {
     waterTemp: { type: Number, require: false },
     airTemp: { type: Number, require: false },
     weather: { type: String, require: false },

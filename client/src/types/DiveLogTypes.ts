@@ -1,3 +1,5 @@
+import { Cordination } from "./Cordination";
+
 export interface ServerSideDiveLogType extends DiveLogTypes {
   id: number;
   author: number;
@@ -6,7 +8,7 @@ export interface ServerSideDiveLogType extends DiveLogTypes {
 export interface DiveLogTypes {
   diveType: "scuba" | "free";
   location: LocationInfo;
-  weather: WeatherInterface;
+  weatherInfo: WeatherInterface;
 
   diveInfo: {
     depth: {
@@ -34,11 +36,9 @@ export interface DiveLogTypes {
   };
 }
 
-export interface LocationInfo {
+export interface LocationInfo extends Cordination {
   title: string;
   address: string;
-  lan: number;
-  lat: number;
 }
 
 export interface WeatherInterface {

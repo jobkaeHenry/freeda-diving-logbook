@@ -2,8 +2,8 @@ import { DiveLogTypes } from "@/types/DiveLogTypes";
 
 const scubaDiveModel: DiveLogTypes = {
   diveType: "scuba",
-  location: { title: "", address: "경기도", lan: 0, lat: 0 },
-  weather: {
+  location: { title: "", address: "경기도", lng: 0, lat: 0 },
+  weatherInfo: {
     waterTemp: 15,
     airTemp: 15,
     weather: "sun",
