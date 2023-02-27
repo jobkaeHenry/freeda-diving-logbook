@@ -1,10 +1,5 @@
 {
   "어떤 활동을 하셨나요?": "What kind of dive have you done?",
   "어디에서 활동하셨나요?" : "Where did you dive?",
-  "어떤 장비를 사용하셨나요?" : "What gears did you use?",
-
-  "맑음":"Sunny",
-  "흐림":"Foggy",
-  "비":"Rain",
-  "눈":"Snow"
+  "어떤 장비를 사용하셨나요?" : "What gears did you use?"
 }
