@@ -17,10 +17,6 @@ const LocationModal = (props: Props) => {
 
   useEffect(() => {
     if (debouncedValue) {
-      // axios.get(
-      //   `/maps/api/place/textsearch/json?key=AIzaSyA_7KytnyYEa4zHKjuByUAQ6fxdE40K9fY&query=${debouncedValue}`,
-      //   { baseURL: "https://maps.googleapis.com"}
-      // ).then((res)=>{console.log(res.data)})
       console.log(debouncedValue);
     }
   }, [debouncedValue]);
