@@ -29,6 +29,7 @@ export async function getStaticProps(context: GetStaticPropsContext) {
         "common",
         "diveForm",
       ])),
+      locale
     },
   };
 }
@@ -61,7 +62,6 @@ const DiveForm = (props: Props) => {
 
   const onSubmit = (e: FormEvent) => {
     e.preventDefault();
-    console.log(data)
     if (isLastStep) {
       axiosPrivate.post(createLog, data).then((res) => {
         console.log(res);

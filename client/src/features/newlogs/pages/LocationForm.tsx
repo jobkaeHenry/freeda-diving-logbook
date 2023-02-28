@@ -11,6 +11,9 @@ import { Modal } from "@/components/GlobalModal/Modal";
 import LocationModal from "../components/LocationModal";
 import InputWithLabel from "../../../components/form/InputWithLabel";
 import { RowWrapper } from "../layout/Wrapper";
+import FixedMap from "../components/FixedMap";
+import { useSetRecoilState } from "recoil";
+import { isModalOpenAtom } from "@/recoil/atom/globalModalAtom";
 
 type Props = Pick<DiveLogTypes, "location" | "weatherInfo" | "diveInfo"> & {
   updateFields: (
@@ -26,102 +29,156 @@ const LocationForm = ({
 }: Props) => {
   const { t } = useTranslation(["diveForm", "common"]);
   const onClickModal = useModal();
-
+  const setModalState = useSetRecoilState(isModalOpenAtom);
   return (
     <FormLayout>
-      {/* 타이틀 */}
-      <FormLayout.Title>
-        <Text typography="h1" bold as={"h1"}>
-          {t("어디에서 활동하셨나요?")}
-        </Text>
-      </FormLayout.Title>
+      <Modal />
+
+      {/* 검색 전 타이틀*/}
+      <FormLayout.Selective
+        validation={location.title && location.address ? false : true}
+      >
+        <FormLayout.Title>
+          <Text typography="h1" bold as={"h1"}>
+            {t("어디에서 활동하셨나요?")}
+          </Text>
+        </FormLayout.Title>
+      </FormLayout.Selective>
+
       {/* 메인 */}
       <FormLayout.Main>
-        <Modal />
-        <TextInput
-          icon={SearchIcon}
-          type="text"
-          required
-          placeholder={t("common:검색하기") || "Search"}
-          defaultValue={location.title}
-          onFocus={() =>
-            onClickModal(<LocationModal currentValue={location.title} />)
-          }
-          // onChange={(e) =>
-          //   updateFields({ location: { ...location, title: e.target.value } })
-          // }
-        />
-        <Radio
-          value={weatherInfo.weather}
-          onChange={(e) => {
-            updateFields({
-              weatherInfo: { ...weatherInfo, weather: WeatherTypeGuard(e) },
-            });
-          }}
+        {/* 검색후 보일것 */}
+        <FormLayout.Selective
+          validation={!location.title || !location.address ? false : true}
         >
-          <Radio.Option value={"sun"}>{t("common:맑음")}</Radio.Option>
-          <Radio.Option value={"fog"}>{t("common:흐림")}</Radio.Option>
-          <Radio.Option value={"rain"}>{t("common:비")}</Radio.Option>
-          <Radio.Option value={"snow"}>{t("common:눈")}</Radio.Option>
-        </Radio>
+          <FormLayout.Title>
+            <Text
+              typography="h1"
+              bold
+              onClick={() => setModalState(true)}
+            >
+              {location.title}
+            </Text>
+            <input
+              type="date"
+              defaultValue={diveInfo.time.date}
+              onChange={(e) => console.log(e.target.value)}
+            />
+          </FormLayout.Title>
+        </FormLayout.Selective>
+        {/* ============== */}
 
-        <RowWrapper>
-          <InputWithLabel
-            onChange={(e) => {
-              updateFields({
-                diveInfo: {
-                  ...diveInfo,
-                  time: { ...diveInfo.time, in: e.target.value },
-                },
-              });
-            }}
-            type={"time"}
-            label={t("common:입수시간")}
-            inputWidth={"100%"}
+        {/* 검색전 보일것 */}
+        <FormLayout.Selective
+          validation={location.title && location.address ? false : true}
+        >
+          <TextInput
+            icon={SearchIcon}
+            type="text"
             required
-            defaultValue={diveInfo.time.in}
+            placeholder={t("common:검색하기") || "Search"}
+            value={location.title}
+            onFocus={() =>
+              onClickModal(
+                <LocationModal
+                  currentValue={location.title}
+                  updateFields={updateFields}
+                />
+              )
+            }
+            onChange={(e) =>
+              updateFields({ location: { ...location, title: e.target.value } })
+            }
           />
-          <InputWithLabel
-            type={"time"}
-            label={t("common:출수시간")}
-            inputWidth={"100%"}
-            onChange={(e) => {
-              updateFields({
-                diveInfo: {
-                  ...diveInfo,
-                  time: { ...diveInfo.time, out: e.target.value },
-                },
-              });
-            }}
-            required
-            defaultValue={diveInfo.time.out}
-          />
-        </RowWrapper>
+        </FormLayout.Selective>
+        {/* =============== */}
 
-        <RowWrapper>
-          <InputWithLabel
-            type={"number"}
-            label={`${t("common:수온")}`}
-            unit="℃"
-            defaultValue={weatherInfo.waterTemp}
+        <FixedMap
+          lng={location.lng}
+          lat={location.lat}
+          height={location.title ? "20vh" : "0"}
+        />
+
+        {/* 검색 후 랜더링 */}
+        <FormLayout.Selective validation={location.title ? true : false}>
+          <Radio
+            value={weatherInfo.weather}
             onChange={(e) => {
               updateFields({
-                weatherInfo: { ...weatherInfo, waterTemp:Number(e.target.value) },
+                weatherInfo: { ...weatherInfo, weather: WeatherTypeGuard(e) },
               });
             }}
-          />
-          <InputWithLabel
-            type={"number"}
-            label={`${t("common:기온")}`}
-            unit="℃"
-            onChange={(e) => {
-              updateFields({
-                weatherInfo: { ...weatherInfo, airTemp:Number(e.target.value) },
-              });
-            }}
-            defaultValue={weatherInfo.airTemp}
-          />
-        </RowWrapper>
+          >
+            <Radio.Option value={"sun"}>{t("common:맑음")}</Radio.Option>
+            <Radio.Option value={"fog"}>{t("common:흐림")}</Radio.Option>
+            <Radio.Option value={"rain"}>{t("common:비")}</Radio.Option>
+            <Radio.Option value={"snow"}>{t("common:눈")}</Radio.Option>
+          </Radio>
+
+          <RowWrapper>
+            <InputWithLabel
+              onChange={(e) => {
+                updateFields({
+                  diveInfo: {
+                    ...diveInfo,
+                    time: { ...diveInfo.time, in: e.target.value },
+                  },
+                });
+              }}
+              type={"time"}
+              label={t("common:입수시간")}
+              inputWidth={"100%"}
+              required
+              defaultValue={diveInfo.time.in}
+            />
+            <InputWithLabel
+              type={"time"}
+              label={t("common:출수시간")}
+              inputWidth={"100%"}
+              onChange={(e) => {
+                updateFields({
+                  diveInfo: {
+                    ...diveInfo,
+                    time: { ...diveInfo.time, out: e.target.value },
+                  },
+                });
+              }}
+              required
+              defaultValue={diveInfo.time.out}
+            />
+          </RowWrapper>
+
+          <RowWrapper>
+            <InputWithLabel
+              type={"number"}
+              label={`${t("common:수온")}`}
+              unit="℃"
+              defaultValue={weatherInfo.waterTemp}
+              onChange={(e) => {
+                updateFields({
+                  weatherInfo: {
+                    ...weatherInfo,
+                    waterTemp: Number(e.target.value),
+                  },
+                });
+              }}
+            />
+            <InputWithLabel
+              type={"number"}
+              label={`${t("common:기온")}`}
+              unit="℃"
+              onChange={(e) => {
+                updateFields({
+                  weatherInfo: {
+                    ...weatherInfo,
+                    airTemp: Number(e.target.value),
+                  },
+                });
+              }}
+              defaultValue={weatherInfo.airTemp}
+            />
+          </RowWrapper>
+        </FormLayout.Selective>
       </FormLayout.Main>
     </FormLayout>
   );

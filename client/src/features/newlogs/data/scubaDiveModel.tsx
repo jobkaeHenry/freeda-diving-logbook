@@ -1,8 +1,11 @@
 import { DiveLogTypes } from "@/types/DiveLogTypes";
 
+const defaultDate = new Date()
+console.log(defaultDate)
+
 const scubaDiveModel: DiveLogTypes = {
   diveType: "scuba",
-  location: { title: "일단채우자", address: "경기도", lng: 0, lat: 0 },
+  location: { title: "", address: "", lng: 0, lat: 0 },
   weatherInfo: {
     waterTemp: 15,
     airTemp: 15,
@@ -13,7 +16,7 @@ const scubaDiveModel: DiveLogTypes = {
     time: {
       in: "",
       out: "",
-      date: String(new Date()),
+      date: "2023-02-28",
     },
     depth: {
       average: 15,
