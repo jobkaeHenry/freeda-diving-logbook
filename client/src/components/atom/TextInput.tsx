@@ -6,6 +6,7 @@ import React, { InputHTMLAttributes } from "react";
 interface Props extends InputHTMLAttributes<HTMLInputElement> {
   icon?: any;
   width?: string;
+  error?: boolean;
 }
 
 const TextInput = (props: Props) => {

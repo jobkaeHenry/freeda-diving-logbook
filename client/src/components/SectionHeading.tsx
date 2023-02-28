@@ -5,7 +5,7 @@ import React from 'react'
 const SectionHeading = styled.div`
 display: flex;
 flex-direction: column;
-padding: 16px 0px 24px;
+padding-bottom: 16px ;
 gap: 8px;
 `
 

@@ -9,6 +9,7 @@ type Props = InputHTMLAttributes<HTMLInputElement> & {
   unit?: string;
   inputWidth?: string;
   label: string;
+  validation?:boolean
 };
 
 const InputWithLabel = (props: Props) => {

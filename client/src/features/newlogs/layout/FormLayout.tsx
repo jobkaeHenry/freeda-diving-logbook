@@ -10,8 +10,15 @@ const FormLayout = (props: Props) => {
   const { children } = props;
   return <>{children}</>;
 };
+interface SelectiveInterface extends Props {
+  validation: boolean;
+}
+const SelectiveRender = ({ validation, children }: SelectiveInterface) => {
+  return validation ? <>{children}</> : <></>;
+};
 
 FormLayout.Title = SectionHeading;
+FormLayout.Selective = SelectiveRender
 
 FormLayout.Main = styled.main`
   display: flex;

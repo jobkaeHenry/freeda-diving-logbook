@@ -33,9 +33,7 @@ export async function getStaticProps(context: GetStaticPropsContext) {
   };
 }
 
-type Props = {
-  locale: "ko" | "en";
-};
+type Props = {};
 
 const DiveForm = (props: Props) => {
   const [data, setData] = useState(scubaDiveModel);
@@ -53,16 +51,17 @@ const DiveForm = (props: Props) => {
   );
 
   const { step, isFirstStep, next, back, isLastStep } = useMultistepForm([
-    <DiveTypeForm {...data} {...props} updateFields={updateField} />,
-    <LocationForm {...data} {...props} updateFields={updateField} />,
-    <DepthForm {...data} {...props} updateFields={updateField} />,
-    <AirUsageForm {...data} {...props} updateFields={updateField} />,
-    <GearForm {...data} {...props} updateFields={updateField} />,
-    <PersonalForm {...data} {...props} updateFields={updateField} />,
+    <DiveTypeForm {...data} updateFields={updateField} />,
+    <LocationForm {...data} updateFields={updateField} />,
+    <DepthForm {...data}  updateFields={updateField} />,
+    <AirUsageForm {...data} updateFields={updateField} />,
+    <GearForm {...data} updateFields={updateField} />,
+    <PersonalForm {...data} updateFields={updateField} />,
   ]);
 
   const onSubmit = (e: FormEvent) => {
     e.preventDefault();
+    console.log(data)
     if (isLastStep) {
       axiosPrivate.post(createLog, data).then((res) => {
         console.log(res);

@@ -37,7 +37,7 @@ export interface DiveLogTypes {
   personal: {
     waterTemp: "warm" | "cold" | "hot";
     content: string|undefined;
-    image: File|undefined;
+    image: string  | undefined
   };
 }
 

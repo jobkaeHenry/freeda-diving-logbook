@@ -2,7 +2,7 @@ import { DiveLogTypes } from "@/types/DiveLogTypes";
 
 const scubaDiveModel: DiveLogTypes = {
   diveType: "scuba",
-  location: { title: "", address: "경기도", lng: 0, lat: 0 },
+  location: { title: "일단채우자", address: "경기도", lng: 0, lat: 0 },
   weatherInfo: {
     waterTemp: 15,
     airTemp: 15,
@@ -13,7 +13,7 @@ const scubaDiveModel: DiveLogTypes = {
     time: {
       in: "",
       out: "",
-      date: "",
+      date: String(new Date()),
     },
     depth: {
       average: 15,
@@ -28,9 +28,9 @@ const scubaDiveModel: DiveLogTypes = {
     gear: {
       suit: {
         type: "wet",
-        thickness: 5,
+        thickness: 3,
       },
-      weight: 0,
+      weight: 5,
     },
   },
   personal: {

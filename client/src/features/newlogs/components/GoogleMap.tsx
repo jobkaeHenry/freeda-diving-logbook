@@ -18,14 +18,12 @@ function MyComponent() {
     id: "google-map-script",
     googleMapsApiKey: googleAPIKey?googleAPIKey:"",
   });
-
+  const [service,setService] = useState()
   const [map, setMap] = useState(null);
-
+  
   const onLoad = useCallback(function callback(map) {
     // This is just an example of getting and using the map instance!!! don't just blindly copy!
     const bounds = new window.google.maps.LatLngBounds(center);
-    map.fitBounds(bounds);
-
     setMap(map);
   }, []);
 

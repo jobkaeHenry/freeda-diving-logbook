@@ -26,7 +26,7 @@ const LocationForm = ({
 }: Props) => {
   const { t } = useTranslation(["diveForm", "common"]);
   const onClickModal = useModal();
-  
+
   return (
     <FormLayout>
       {/* 타이틀 */}
@@ -74,7 +74,6 @@ const LocationForm = ({
                   time: { ...diveInfo.time, in: e.target.value },
                 },
               });
-              console.log(diveInfo);
             }}
             type={"time"}
             label={t("common:입수시간")}

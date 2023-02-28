@@ -39,7 +39,7 @@ export const Modal = () => {
 };
 const ModalWrapper = styled.div`
   width: calc(100% - 32px);
-  height: calc(100% - 32px);
+  height: calc(90% - 32px);
   position: relative;
   padding: 16px;
   background-color: var(--pure-white);
