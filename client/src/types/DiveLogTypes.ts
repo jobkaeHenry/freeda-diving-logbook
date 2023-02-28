@@ -28,7 +28,7 @@ export interface DiveLogTypes {
     };
     gear: {
       suit: {
-        type: "wet" | "semi" | "dry" | "skin";
+        type: "Wet" | "Semi" | "Dry" | "Skin";
         thickness: number;
       };
       weight: number;

@@ -1,6 +1,6 @@
 import React from "react";
-import { ColumnWrapper, RowWrapper } from "../layout/Wrapper";
-import Text from "@/components/atom/Text";
+import { ColumnWrapper, RowWrapper } from "../../../layouts/Wrapper";
+import Text from "../../../components/atom/Text";
 import { useTranslation } from "react-i18next";
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";

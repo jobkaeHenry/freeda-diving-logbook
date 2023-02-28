@@ -33,7 +33,7 @@ const scubaDiveModel: DiveLogTypes = {
     },
     gear: {
       suit: {
-        type: "wet",
+        type: "Wet",
         thickness: 3,
       },
       weight: 5,

@@ -7,7 +7,7 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import AirUsageIndicator from "../components/AirUsageIndicator";
 import FormLayout from "../layout/FormLayout";
-import { RowWrapper } from "../layout/Wrapper";
+import { RowWrapper } from "../../../layouts/Wrapper";
 
 type Props = Pick<DiveLogTypes, "diveInfo"> & {
   updateFields: (field: Pick<DiveLogTypes, "diveInfo">) => void;

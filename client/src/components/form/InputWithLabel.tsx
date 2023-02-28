@@ -1,7 +1,7 @@
 import TextInput from "@/components/atom/TextInput";
 import React, { InputHTMLAttributes } from "react";
 import Text from "@/components/atom/Text";
-import { RowWrapper } from "../../features/newlogs/layout/Wrapper";
+import { RowWrapper } from "../../layouts/Wrapper";
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 

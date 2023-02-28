@@ -4,7 +4,7 @@ import InputWithLabel from "@/components/form/InputWithLabel";
 import { DiveLogTypes } from "@/types/DiveLogTypes";
 import { useTranslation } from "next-i18next";
 import FormLayout from "../layout/FormLayout";
-import { RowWrapper } from "../layout/Wrapper";
+import { RowWrapper } from "../../../layouts/Wrapper";
 
 type Props = Pick<DiveLogTypes, "diveInfo"> & {
   updateFields: (field: Pick<DiveLogTypes, "diveInfo">) => void;
@@ -30,10 +30,10 @@ const GearForm = ({ diveInfo, updateFields }: Props) => {
           value={diveInfo.gear.suit.type}
           onChange={(e) => {
             if (
-              e.target.value === "wet" ||
-              e.target.value === "semi" ||
-              e.target.value === "dry" ||
-              e.target.value === "skin"
+              e.target.value === "Wet" ||
+              e.target.value === "Semi" ||
+              e.target.value === "Dry" ||
+              e.target.value === "Skin"
             )
               updateFields({
                 diveInfo: {
@@ -49,10 +49,10 @@ const GearForm = ({ diveInfo, updateFields }: Props) => {
               });
           }}
         >
-          <Radio.Option value={"wet"}>{t("Wet")}</Radio.Option>
-          <Radio.Option value={"semi"}>{t("Semi")}</Radio.Option>
-          <Radio.Option value={"dry"}>{t("Dry")}</Radio.Option>
-          <Radio.Option value={"skin"}>{t("Skin")}</Radio.Option>
+          <Radio.Option value={"Wet"}>{t("Wet")}</Radio.Option>
+          <Radio.Option value={"Semi"}>{t("Semi")}</Radio.Option>
+          <Radio.Option value={"Dry"}>{t("Dry")}</Radio.Option>
+          <Radio.Option value={"Skin"}>{t("Skin")}</Radio.Option>
         </Radio>
 
         <RowWrapper>

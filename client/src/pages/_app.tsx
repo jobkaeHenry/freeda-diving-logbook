@@ -6,7 +6,7 @@ import { RecoilRoot } from "recoil";
 
 function App({ Component, pageProps }: AppProps) {
   return (
-
+    
     <RecoilRoot>
       <DefaultLayout>
         <Component {...pageProps} />

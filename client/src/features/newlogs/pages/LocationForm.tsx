@@ -10,11 +10,10 @@ import useModal from "@/hooks/useModal";
 import { Modal } from "@/components/GlobalModal/Modal";
 import LocationModal from "../components/LocationModal";
 import InputWithLabel from "../../../components/form/InputWithLabel";
-import { ColumnWrapper, RowWrapper } from "../layout/Wrapper";
+import { ColumnWrapper, RowWrapper } from "../../../layouts/Wrapper";
 import FixedMap from "../components/FixedMap";
 import { useSetRecoilState } from "recoil";
 import { isModalOpenAtom } from "@/recoil/atom/globalModalAtom";
-import getTimeData from "@/utils/getTimeData";
 
 type Props = Pick<DiveLogTypes, "location" | "weatherInfo" | "diveInfo"> & {
   updateFields: (

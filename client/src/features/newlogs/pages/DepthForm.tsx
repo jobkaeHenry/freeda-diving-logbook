@@ -1,11 +1,10 @@
 import Text from "@/components/atom/Text";
 import InputWithLabel from "@/components/form/InputWithLabel";
 import { DiveLogTypes } from "@/types/DiveLogTypes";
-import { locale } from "@/types/Locale";
 import { useTranslation } from "react-i18next";
 import DepthGraph from "../components/DepthGraph";
 import FormLayout from "../layout/FormLayout";
-import { RowWrapper } from "../layout/Wrapper";
+import { RowWrapper } from "../../../layouts/Wrapper";
 
 type Props = Pick<DiveLogTypes, "diveInfo"> & {
   updateFields: (field: Pick<DiveLogTypes, "diveInfo">) => void;

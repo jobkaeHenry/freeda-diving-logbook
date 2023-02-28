@@ -1,35 +1,34 @@
 import React from "react";
-import DepthGraphSVG from "@/assets/depthGraph.svg";
+import AirUsageIndicator from "@/assets/airUsageIndicator.svg";
 import styled from "@emotion/styled";
-import Text from "@/components/atom/Text";
+import Text from "../../../components/atom/Text";
 import { useTranslation } from "react-i18next";
-import { ColumnWrapper } from "../../../layouts/Wrapper";
-import { css } from "@emotion/react";
+import { ColumnWrapper } from "@/layouts/Wrapper";
 
 type Props = {
-  average: number;
-  max: number;
+  airIn: number;
+  airOut: number;
 };
 
-const DepthGraph = ({ average, max }: Props) => {
+const AirIsageGraphic = ({ airIn, airOut }: Props) => {
   const { t } = useTranslation();
   return (
     <Container>
-      <DepthGraphSVG/>
+      <AirUsageIndicator />
 
-      <ColumnWrapper >
+      <ColumnWrapper>
         <ColumnWrapper noGap>
           <Text typography={"sub"} color={"var(--font-gray)"}>
-            {t("평균수심")}
+            {t("입수잔압")}
           </Text>
-          <Text typography={"h3"} bold>{`${average}m`}</Text>
+          <Text typography={"h3"} bold>{airIn}</Text>
         </ColumnWrapper>
 
         <ColumnWrapper noGap>
           <Text typography={"sub"} color={"var(--font-gray)"}>
-            {t("최대수심")}
+            {t("출수잔압")}
           </Text>
-          <Text typography={"h3"} bold>{`${max}m`}</Text>
+          <Text typography={"h3"} bold>{airOut}</Text>
         </ColumnWrapper>
       </ColumnWrapper>
     </Container>
@@ -40,8 +39,8 @@ const Container = styled.div`
   width: 100%;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: left;
   gap: 16px;
 `;
 
-export default DepthGraph;
+export default AirIsageGraphic;
