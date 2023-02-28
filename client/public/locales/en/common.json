@@ -1,6 +1,10 @@
 {
-  "출수잔압": "Air-in",
-  "입수잔압": "Air-out",
+  "공기 사용량":"Air usage",
+  "총 사용량" :"Total Air usage",
+  "출수잔압": "Air-out",
+  "입수잔압": "Air-in",
+  "멀티탱크":"Multi Tank",
+  "산소농도":"Oxygen",
 
   "입수시간" : "Time-In",
   "출수시간" : "Time-Out",
@@ -10,6 +14,13 @@
 
   "장소": "Place",
   "주소": "Address",
+
+  "수트" : "Suit",
+  "웨이트":"Weight",
+
+  "수심" : "Depth",
+  "평균수심" : "Avg Depth",
+  "최대수심" : "Max Depth",
 
   "스쿠버다이빙":"Scuba Diving",
   "프리다이빙":"Free Diving",
@@ -22,5 +33,23 @@
   "맑음":"Sunny",
   "흐림":"Foggy",
   "비":"Rain",
-  "눈":"Snow"
+  "눈":"Snow",
+
+  "수트_종류" : "Type of Suit",
+  "두께" : "Thickness",
+  "Wet" :"Wet",
+  "Dry" :"Dry",
+  "Semi" :"Semi",
+  "Skin" :"Skin",
+
+  "체감수온":"Feel like Water temperature",
+  "체감시야":"Visibility",
+
+  "적당함":"Warm",
+  "추움":"Cold",
+  "더움":"Hot",
+
+  "좋음":"Good",
+  "보통":"Normal",
+  "나쁨":"Bad"
 }
