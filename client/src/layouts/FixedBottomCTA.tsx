@@ -26,6 +26,7 @@ export default FixedBottomCTA;
 
 const Wrapper = styled.div`
   position: fixed;
+  background-color: var(--pure-white);
   bottom: 0;
   left: 0;
   padding: 8px;
