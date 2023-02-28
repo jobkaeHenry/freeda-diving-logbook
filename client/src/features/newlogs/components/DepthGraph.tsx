@@ -18,14 +18,14 @@ const DepthGraph = ({ average, max }: Props) => {
       <DepthGraphSVG/>
 
       <ColumnWrapper >
-        <ColumnWrapper css={css`gap:0;`}>
+        <ColumnWrapper noGap>
           <Text typography={"sub"} color={"var(--font-gray)"}>
             {t("평균수심")}
           </Text>
           <Text typography={"h3"} bold>{`${average}m`}</Text>
         </ColumnWrapper>
 
-        <ColumnWrapper css={css`gap:0;`}>
+        <ColumnWrapper noGap>
           <Text typography={"sub"} color={"var(--font-gray)"}>
             {t("최대수심")}
           </Text>

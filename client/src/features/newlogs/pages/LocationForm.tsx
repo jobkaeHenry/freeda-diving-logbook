@@ -10,10 +10,11 @@ import useModal from "@/hooks/useModal";
 import { Modal } from "@/components/GlobalModal/Modal";
 import LocationModal from "../components/LocationModal";
 import InputWithLabel from "../../../components/form/InputWithLabel";
-import { RowWrapper } from "../layout/Wrapper";
+import { ColumnWrapper, RowWrapper } from "../layout/Wrapper";
 import FixedMap from "../components/FixedMap";
 import { useSetRecoilState } from "recoil";
 import { isModalOpenAtom } from "@/recoil/atom/globalModalAtom";
+import getTimeData from "@/utils/getTimeData";
 
 type Props = Pick<DiveLogTypes, "location" | "weatherInfo" | "diveInfo"> & {
   updateFields: (
@@ -30,6 +31,7 @@ const LocationForm = ({
   const { t } = useTranslation(["diveForm", "common"]);
   const onClickModal = useModal();
   const setModalState = useSetRecoilState(isModalOpenAtom);
+
   return (
     <FormLayout>
       <Modal />
@@ -47,23 +49,31 @@ const LocationForm = ({
 
       {/* 메인 */}
       <FormLayout.Main>
-        {/* 검색후 보일것 */}
+        {/* 검색후 타이틀 */}
         <FormLayout.Selective
           validation={!location.title || !location.address ? false : true}
         >
           <FormLayout.Title>
-            <Text
-              typography="h1"
-              bold
-              onClick={() => setModalState(true)}
-            >
-              {location.title}
-            </Text>
-            <input
-              type="date"
-              defaultValue={diveInfo.time.date}
-              onChange={(e) => console.log(e.target.value)}
-            />
+            <ColumnWrapper noGap>
+              <Text typography="h1" bold onClick={() => setModalState(true)}>
+                {location.title}
+              </Text>
+              <input
+                type="date"
+                defaultValue={diveInfo.time.date}
+                onChange={(e) => {
+                  updateFields({
+                    diveInfo: {
+                      ...diveInfo,
+                      time: {
+                        ...diveInfo.time,
+                        date: e.target.value,
+                      },
+                    },
+                  });
+                }}
+              />
+            </ColumnWrapper>
           </FormLayout.Title>
         </FormLayout.Selective>
         {/* ============== */}

@@ -1,7 +1,10 @@
 import { DiveLogTypes } from "@/types/DiveLogTypes";
+import dayjs from "dayjs";
 
-const defaultDate = new Date()
-console.log(defaultDate)
+const now = new Date()
+const parsedDate = dayjs(now).format('YYYY-MM-DD')
+const parsedTime = dayjs(now).format('HH:mm')
+const parsedTimePlus =dayjs(now).add(1,'hour').format('HH:mm')
 
 const scubaDiveModel: DiveLogTypes = {
   diveType: "scuba",
@@ -14,9 +17,9 @@ const scubaDiveModel: DiveLogTypes = {
   },
   diveInfo: {
     time: {
-      in: "",
-      out: "",
-      date: "2023-02-28",
+      in: parsedTime,
+      out: parsedTimePlus,
+      date: parsedDate,
     },
     depth: {
       average: 15,

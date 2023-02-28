@@ -47,6 +47,7 @@ const DiveForm = (props: Props) => {
       setData((prev) => {
         return { ...prev, ...field };
       });
+      console.log(data)
     },
     []
   );
