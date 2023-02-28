@@ -69,10 +69,10 @@ const DiveLog = (props: Props) => {
             {diveInfo.gear.suit.type}
           </ValueWithTitle>
           <ValueWithTitle title={t("두께")}>
-            {diveInfo.gear.suit.thickness} mm
+            {`${diveInfo.gear.suit.thickness} mm`}
           </ValueWithTitle>
           <ValueWithTitle title={t("웨이트")}>
-            {diveInfo.gear.weight} kg
+            {`${diveInfo.gear.weight} kg`}
           </ValueWithTitle>
         </RowWrapper>
 
@@ -96,6 +96,5 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     },
   };
 };
-
 
 export default DiveLog;
