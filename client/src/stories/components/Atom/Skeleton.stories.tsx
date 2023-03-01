@@ -1,27 +1,30 @@
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
-import Radio from "../../components/atom/Radio";
-import MobileWrapper from "../../layouts/MobileWrapper";
+import Skeleton from "@/components/atom/Skeleton";
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
-  title: "Components/Radio",
-  component: Radio,
+  title: "Components/Atom/Skeleton",
+  component: Skeleton,
   // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
-} as ComponentMeta<typeof Radio>;
+  argTypes: {
+    width: { control: "text" },
+    height: { control: "text" },
+  },
+} as ComponentMeta<typeof Skeleton>;
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: ComponentStory<typeof Radio> = (args) => (
-  <MobileWrapper>
-    <Radio {...args}>
-      <Radio.Option value={"옵션1"}>옵션1</Radio.Option>
-      <Radio.Option value={"옵션2"}>옵션2</Radio.Option>
-    </Radio>
-  </MobileWrapper>
+const Template: ComponentStory<typeof Skeleton> = (args) => (
+  <>
+    <Skeleton {...args} />
+  </>
 );
 
 export const Default = Template.bind({});
+
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
+
 Default.args = {
-  defaultValue: "옵션1",
+  width: "300px",
+  height: "200px",
 };

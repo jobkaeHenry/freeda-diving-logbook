@@ -32,6 +32,7 @@ const AirUsageForm = ({ diveInfo, updateFields }: Props) => {
             label={t("입수잔압")}
             unit={"bar"}
             defaultValue={diveInfo.air.in}
+            inputWidth={"50%"}
             onChange={(e) => {
               updateFields({
                 diveInfo: {
@@ -46,6 +47,7 @@ const AirUsageForm = ({ diveInfo, updateFields }: Props) => {
             label={t("출수잔압")}
             unit={"bar"}
             defaultValue={diveInfo.air.out}
+            inputWidth={"50%"}
             onChange={(e) => {
               updateFields({
                 diveInfo: {
