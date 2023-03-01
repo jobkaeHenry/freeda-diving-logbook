@@ -13,7 +13,7 @@ import GearForm from "@/features/newlogs/pages/GearForm";
 import PersonalForm from "@/features/newlogs/pages/PersonalForm";
 import scubaDiveModel from "@/features/newlogs/data/scubaDiveModel";
 import { DiveLogTypes } from "@/types/DiveLogTypes";
-import { axiosPrivate } from "@/lib/api/axios";
+import axios, { axiosPrivate } from "@/lib/api/axios";
 import { createLog } from "@/features/newlogs/data/URL/newLogs";
 import { useRouter } from "next/router";
 import { getDiveLog } from "@/data/URL/local/divelog/url";
@@ -64,7 +64,8 @@ const DiveForm = (props: Props) => {
   const onSubmit = (e: FormEvent) => {
     e.preventDefault();
     if (isLastStep) {
-      axiosPrivate.post(createLog, data).then((res) => {
+      axios.post(createLog, data).then((res) => {
+      // axiosPrivate.post(createLog, data).then((res) => {
         console.log(res);
         router.replace(`/${getDiveLog}/${res.data.id}`);
       });

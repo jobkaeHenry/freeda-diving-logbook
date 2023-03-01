@@ -2,10 +2,11 @@ import useFetch from "@/hooks/useFetch";
 import axios from "axios";
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
+const BASE_URL_DEV = process.env.NEXT_PUBLIC_BASE_URL_DEV;
 
 axios.defaults.xsrfCookieName = "csrftoken";
 axios.defaults.xsrfHeaderName = "x-CSRFToken";
-axios.defaults.baseURL = "http://localhost:5000";
+axios.defaults.baseURL = BASE_URL_DEV;
 
 if (process.env.NODE_DEV === "production") {
   axios.defaults.baseURL = BASE_URL;

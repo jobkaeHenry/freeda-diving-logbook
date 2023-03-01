@@ -6,7 +6,7 @@ import mongoose from "mongoose";
 import authChecker from "./controllers/check-auth";
 import dotenv from "dotenv";
 import diveLogRoute from "./routers/diveLogRoute";
-import cors from 'cors'
+import cors from "cors";
 
 // 환경변수사용
 dotenv.config();
@@ -16,11 +16,14 @@ const app = express();
 // 헬맷 설정 필요
 app.use(helmet());
 app.use(bodyParser.json());
-app.use(cors({
-  origin: "http://localhost:3000",
-  credentials: true,
-  methods: ["GET", "POST"],
-}));
+app.use(
+  cors({
+    // origin: "http://localhost:3000",
+    origin: "*",
+    credentials: true,
+    methods: ["GET", "POST"],
+  })
+);
 
 // 오픈된 라우팅
 app.use("/divelog", diveLogRoute);
