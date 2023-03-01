@@ -17,10 +17,10 @@ const ValueWithTitle = (props: Props) => {
         width: 100%;
       `}
     >
-      <Text typography={"p"} color="var(--font-gray)">
+      <Text typography={"sub"} color="var(--font-gray)">
         {title}
       </Text>
-      <Text typography={"h4"} bold>
+      <Text typography={"h4"} weight="var(--medium)">
         {children}
       </Text>
     </ColumnWrapper>

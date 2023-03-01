@@ -4,6 +4,7 @@ import styled from "@emotion/styled";
 import Text from "../../../components/atom/Text";
 import { useTranslation } from "react-i18next";
 import { ColumnWrapper } from "@/layouts/Wrapper";
+import ValueWithTitle from "@/components/diveLogs/ValueWithTitle";
 
 type Props = {
   airIn: number;
@@ -15,21 +16,9 @@ const AirIsageGraphic = ({ airIn, airOut }: Props) => {
   return (
     <Container>
       <AirUsageIndicator />
-
       <ColumnWrapper>
-        <ColumnWrapper noGap>
-          <Text typography={"sub"} color={"var(--font-gray)"}>
-            {t("입수잔압")}
-          </Text>
-          <Text typography={"h3"} bold>{airIn}</Text>
-        </ColumnWrapper>
-
-        <ColumnWrapper noGap>
-          <Text typography={"sub"} color={"var(--font-gray)"}>
-            {t("출수잔압")}
-          </Text>
-          <Text typography={"h3"} bold>{airOut}</Text>
-        </ColumnWrapper>
+        <ValueWithTitle title={t("입수잔압")}>{airIn}</ValueWithTitle>
+        <ValueWithTitle title={t("출수잔압")}>{airOut}</ValueWithTitle>
       </ColumnWrapper>
     </Container>
   );

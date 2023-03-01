@@ -5,6 +5,7 @@ import Text from "@/components/atom/Text";
 import { useTranslation } from "react-i18next";
 import { ColumnWrapper } from "../../../layouts/Wrapper";
 import { css } from "@emotion/react";
+import ValueWithTitle from "@/components/diveLogs/ValueWithTitle";
 
 type Props = {
   average: number;
@@ -15,22 +16,11 @@ const DepthGraph = ({ average, max }: Props) => {
   const { t } = useTranslation();
   return (
     <Container>
-      <DepthGraphSVG/>
+      <DepthGraphSVG />
 
-      <ColumnWrapper >
-        <ColumnWrapper noGap>
-          <Text typography={"sub"} color={"var(--font-gray)"}>
-            {t("평균수심")}
-          </Text>
-          <Text typography={"h3"} bold>{`${average}m`}</Text>
-        </ColumnWrapper>
-
-        <ColumnWrapper noGap>
-          <Text typography={"sub"} color={"var(--font-gray)"}>
-            {t("최대수심")}
-          </Text>
-          <Text typography={"h3"} bold>{`${max}m`}</Text>
-        </ColumnWrapper>
+      <ColumnWrapper>
+        <ValueWithTitle title={t("평균수심")}>{`${average}m`}</ValueWithTitle>
+        <ValueWithTitle title={t("최대수심")}>{`${max}m`}</ValueWithTitle>
       </ColumnWrapper>
     </Container>
   );
