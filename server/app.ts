@@ -7,15 +7,20 @@ import authChecker from "./controllers/check-auth";
 import dotenv from "dotenv";
 import diveLogRoute from "./routers/diveLogRoute";
 import cors from "cors";
+import swaggerJsdoc from "swagger-jsdoc";
+import swaggerUi from "swagger-ui-express";
+import options from "./swaggerOption";
 
 // 환경변수사용
 dotenv.config();
 const mongoDB_PW = process.env.MONGO_DB_PW;
+const specs = swaggerJsdoc(options);
 // express
 const app = express();
 // 헬맷 설정 필요
 app.use(helmet());
 app.use(bodyParser.json());
+
 app.use(
   cors({
     // origin: "http://localhost:3000",
@@ -24,6 +29,8 @@ app.use(
     methods: ["GET", "POST"],
   })
 );
+
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(specs,{explorer: true}));
 
 // 오픈된 라우팅
 app.use("/divelog", diveLogRoute);
