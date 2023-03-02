@@ -1,7 +1,6 @@
-import { getDiveLog } from "@/data/URL/local/divelog/url";
+import { getDiveLog, newLog } from "@/data/URL/local/divelog/url";
 import axios from "@/lib/api/axios";
 import { ServerSideDiveLogType } from "@/types/DiveLogTypes";
-
 import { GetServerSideProps } from "next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "next-i18next";
@@ -10,23 +9,36 @@ import FixedMap from "@/services/GoogleMap/FixedMap";
 import Text from "@/components/atom/Text";
 import { ColumnWrapper, RowWrapper } from "@/layouts/Wrapper";
 import ValueWithTitle from "@/components/diveLogs/ValueWithTitle";
-import AirIndicator from "@/features/newlogs/components/AirUsageIndicator";
 import DepthGraph from "@/features/newlogs/components/DepthGraph";
 import AirUsageGraphic from "@/features/divelog/components/AirUsageGraphic";
 import Thermometer from "@/features/divelog/components/Thermometer";
+import { Button } from "@/components/atom/Button";
+import useModal from "@/hooks/useModal";
+import QRCode from "react-qr-code";
+import { Modal } from "@/components/GlobalModal/Modal";
+import { freedaBaseURL } from "@/data/URL/local/freedaBaseURL";
 
 type Props = {
   data: ServerSideDiveLogType;
   locale: string;
+  id: string;
 };
 
 const DiveLog = (props: Props) => {
   const { t } = useTranslation("common");
-  const { data } = props;
+  const { data, id } = props;
   const { location, diveInfo, diveType, weatherInfo, personal } = data;
+  const onClickModal = useModal();
   return (
     <LogsLayout>
       <LogsLayout.Main>
+        <Modal></Modal>
+        <Button
+          onClick={() => onClickModal(<QRCode value={`${freedaBaseURL}/${newLog}/${id}`} />)}
+        >
+          큐알 공유하기
+        </Button>
+
         <FixedMap lng={location.lng} lat={location.lat} height={"20vh"} />
 
         <ColumnWrapper noGap>
@@ -92,6 +104,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   return {
     props: {
       data,
+      id,
       ...(await serverSideTranslations(locale ? locale : "ko", ["common"])),
     },
   };

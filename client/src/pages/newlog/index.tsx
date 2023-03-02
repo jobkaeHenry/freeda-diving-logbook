@@ -12,14 +12,15 @@ import AirUsageForm from "@/features/newlogs/pages/AirUsageForm";
 import GearForm from "@/features/newlogs/pages/GearForm";
 import PersonalForm from "@/features/newlogs/pages/PersonalForm";
 import scubaDiveModel from "@/features/newlogs/data/scubaDiveModel";
-import { DiveLogTypes, ServerSideDiveLogType } from "@/types/DiveLogTypes";
+import { DiveLogTypes } from "@/types/DiveLogTypes";
 import axios, { axiosPrivate } from "@/lib/api/axios";
-import { createLog } from "@/features/newlogs/data/URL/newLogs";
+
 import { useRouter } from "next/router";
 import { getDiveLog } from "@/data/URL/local/divelog/url";
 import { GetStaticPropsContext } from "next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "next-i18next";
+import { createLogServer } from "@/data/URL/server/newlog/createLog";
 
 export async function getStaticProps(context: GetStaticPropsContext) {
   const locale = context.locale;
@@ -64,7 +65,7 @@ const DiveForm = ({ existingData }: Props) => {
   const onSubmit = (e: FormEvent) => {
     e.preventDefault();
     if (isLastStep) {
-      axios.post(createLog, data).then((res) => {
+      axios.post(createLogServer, data).then((res) => {
       // axiosPrivate.post(createLog, data).then((res) => {
         console.log(res);
         router.replace(`/${getDiveLog}/${res.data.id}`);
