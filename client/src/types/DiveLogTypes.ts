@@ -1,8 +1,10 @@
 import { Cordination } from "./Cordination";
 
 export interface ServerSideDiveLogType extends DiveLogTypes {
-  id: number;
-  author: number;
+  id: string;
+  _id: string;
+  author: string;
+  __v:string;
 }
 
 export interface DiveLogTypes {

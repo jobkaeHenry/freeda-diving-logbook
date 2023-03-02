@@ -1,12 +1,14 @@
 import { ReactElement, useState } from "react";
 
-const useMultistepForm = (steps: ReactElement[]) => {
-  const [currentIndex, setCurrentIndex] = useState(0);
+const useMultistepForm = (steps: ReactElement[], initialPage?: number) => {
+  const [currentIndex, setCurrentIndex] = useState(
+    initialPage ? initialPage : 0
+  );
 
   /** 현재 index 직후의 컴포넌트로 이동하게 하는 함수 */
   const next = () => {
     setCurrentIndex((prev) => {
-      if (prev < steps.length-1) {
+      if (prev < steps.length - 1) {
         return prev + 1;
       } else return prev;
     });

@@ -11,7 +11,7 @@ import { Modal } from "@/components/GlobalModal/Modal";
 import LocationModal from "../components/LocationModal";
 import InputWithLabel from "../../../components/form/InputWithLabel";
 import { ColumnWrapper, RowWrapper } from "../../../layouts/Wrapper";
-import FixedMap from "../components/FixedMap";
+import FixedMap from "../../../services/GoogleMap/FixedMap";
 import { useSetRecoilState } from "recoil";
 import { isModalOpenAtom } from "@/recoil/atom/globalModalAtom";
 

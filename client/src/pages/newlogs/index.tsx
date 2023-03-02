@@ -12,7 +12,7 @@ import AirUsageForm from "@/features/newlogs/pages/AirUsageForm";
 import GearForm from "@/features/newlogs/pages/GearForm";
 import PersonalForm from "@/features/newlogs/pages/PersonalForm";
 import scubaDiveModel from "@/features/newlogs/data/scubaDiveModel";
-import { DiveLogTypes } from "@/types/DiveLogTypes";
+import { DiveLogTypes, ServerSideDiveLogType } from "@/types/DiveLogTypes";
 import axios, { axiosPrivate } from "@/lib/api/axios";
 import { createLog } from "@/features/newlogs/data/URL/newLogs";
 import { useRouter } from "next/router";
@@ -25,7 +25,7 @@ export async function getStaticProps(context: GetStaticPropsContext) {
   const locale = context.locale;
   return {
     props: {
-      ...(await serverSideTranslations(locale ? locale : "ko", [
+      ...(await serverSideTranslations(locale ? locale : "en", [
         "common",
         "diveForm",
       ])),
@@ -34,32 +34,32 @@ export async function getStaticProps(context: GetStaticPropsContext) {
   };
 }
 
-type Props = {};
+type Props = { existingData?: DiveLogTypes, locale?:string };
 
-const DiveForm = (props: Props) => {
-  const [data, setData] = useState(scubaDiveModel);
+const DiveForm = ({ existingData }: Props) => {
+  const [data, setData] = useState(
+    existingData ? existingData : scubaDiveModel
+  );
+  const { t } = useTranslation();
   const router = useRouter();
 
-  const { t } = useTranslation();
+  const updateField = useCallback((field: Partial<DiveLogTypes>) => {
+    setData((prev) => {
+      return { ...prev, ...field };
+    });
+  }, []);
 
-  const updateField = useCallback(
-    (field: Partial<DiveLogTypes>) => {
-      setData((prev) => {
-        return { ...prev, ...field };
-      });
-      console.log(data)
-    },
-    []
+  const { step, isFirstStep, next, back, isLastStep } = useMultistepForm(
+    [
+      <DiveTypeForm {...data} updateFields={updateField} />,
+      <LocationForm {...data} updateFields={updateField} />,
+      <DepthForm {...data} updateFields={updateField} />,
+      <AirUsageForm {...data} updateFields={updateField} />,
+      <GearForm {...data} updateFields={updateField} />,
+      <PersonalForm {...data} updateFields={updateField} />,
+    ],
+    existingData ? 3 : 0
   );
-
-  const { step, isFirstStep, next, back, isLastStep } = useMultistepForm([
-    <DiveTypeForm {...data} updateFields={updateField} />,
-    <LocationForm {...data} updateFields={updateField} />,
-    <DepthForm {...data}  updateFields={updateField} />,
-    <AirUsageForm {...data} updateFields={updateField} />,
-    <GearForm {...data} updateFields={updateField} />,
-    <PersonalForm {...data} updateFields={updateField} />,
-  ]);
 
   const onSubmit = (e: FormEvent) => {
     e.preventDefault();

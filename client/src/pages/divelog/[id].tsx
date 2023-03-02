@@ -6,7 +6,7 @@ import { GetServerSideProps } from "next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "next-i18next";
 import LogsLayout from "@/features/newlogs/layout/LogsLayout";
-import FixedMap from "@/features/newlogs/components/FixedMap";
+import FixedMap from "@/services/GoogleMap/FixedMap";
 import Text from "@/components/atom/Text";
 import { ColumnWrapper, RowWrapper } from "@/layouts/Wrapper";
 import ValueWithTitle from "@/components/diveLogs/ValueWithTitle";
