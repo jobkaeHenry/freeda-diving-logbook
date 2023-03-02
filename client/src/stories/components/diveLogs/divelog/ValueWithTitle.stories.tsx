@@ -16,17 +16,13 @@ export default {
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
 const Template: ComponentStory<typeof ValueWithTitle> = (args) => (
-  <>
-    <ValueWithTitle {...args} />
-  </>
+  <ValueWithTitle {...args} />
 );
 const WrapperTemplate: ComponentStory<typeof ValueWithTitle> = (args: any) => (
-
-    <RowWrapper>
-      <ValueWithTitle {...args.first} />
-      <ValueWithTitle {...args.second} />
-    </RowWrapper>
-
+  <RowWrapper>
+    <ValueWithTitle {...args.first} />
+    <ValueWithTitle {...args.second} />
+  </RowWrapper>
 );
 
 export const Default = Template.bind({});
