@@ -1,4 +1,5 @@
-import { ReactElement, useState } from "react";
+import FormSkeleton from "@/features/newlogs/components/FormSkeleton";
+import { ReactElement, Suspense, useState } from "react";
 
 const useMultistepForm = (steps: ReactElement[], initialPage?: number) => {
   const [currentIndex, setCurrentIndex] = useState(
@@ -39,7 +40,7 @@ const useMultistepForm = (steps: ReactElement[], initialPage?: number) => {
     next,
     back,
     goTo,
-    step: steps[currentIndex],
+    step: <Suspense fallback={<FormSkeleton/>}>{steps[currentIndex]}</Suspense>,
     isFirstStep,
     isLastStep,
   };
