@@ -1,7 +1,6 @@
 import React from "react";
 import ThermometerSVG from "@/assets/thermometer.svg";
 import styled from "@emotion/styled";
-import Text from "../../../components/atom/Text";
 import { useTranslation } from "react-i18next";
 import { ColumnWrapper } from "@/layouts/Wrapper";
 import ValueWithTitle from "@/components/diveLogs/ValueWithTitle";
@@ -18,8 +17,8 @@ const Thermometer = ({ airTemp, waterTemp }: Props) => {
       <ThermometerSVG />
 
       <ColumnWrapper>
-        <ValueWithTitle title={t("기온")}>{airTemp}</ValueWithTitle>
-        <ValueWithTitle title={t("수온")}>{waterTemp}</ValueWithTitle>
+        <ValueWithTitle title={t("기온")}>{`${airTemp} ℃`}</ValueWithTitle>
+        <ValueWithTitle title={t("수온")}>{`${waterTemp} ℃`}</ValueWithTitle>
       </ColumnWrapper>
     </Container>
   );
