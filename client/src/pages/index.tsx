@@ -11,7 +11,6 @@ export default function Home() {
       <Text typography={"h1"} as={"h1"} bold>
         홈페이지입니당
       </Text>
-      <QRCode value="http://localhost:3000/newlogs" size={200}></QRCode>
       <Button onClick={() => router.push(newLog)}>폼가보기</Button>
     </>
   );

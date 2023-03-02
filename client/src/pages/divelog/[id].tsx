@@ -17,6 +17,7 @@ import useModal from "@/hooks/useModal";
 import QRCode from "react-qr-code";
 import { Modal } from "@/components/GlobalModal/Modal";
 import { freedaBaseURL } from "@/data/URL/local/freedaBaseURL";
+import QRModal from "@/features/divelog/components/modal/QRModal";
 
 type Props = {
   data: ServerSideDiveLogType;
@@ -32,9 +33,16 @@ const DiveLog = (props: Props) => {
   return (
     <LogsLayout>
       <LogsLayout.Main>
-        <Modal></Modal>
+        <Modal />
         <Button
-          onClick={() => onClickModal(<QRCode value={`${freedaBaseURL}/${newLog}/${id}`} />)}
+          onClick={() =>
+            onClickModal(
+              <QRModal
+                value={`${freedaBaseURL}/${newLog}/${id}`}
+                author={data.author}
+              />
+            )
+          }
         >
           큐알 공유하기
         </Button>
