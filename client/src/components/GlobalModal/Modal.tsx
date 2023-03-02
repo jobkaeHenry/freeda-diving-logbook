@@ -1,3 +1,4 @@
+import useWindowSize from "@/hooks/useWindowSize";
 import {
   isModalOpenAtom,
   modalComponentAtom,
@@ -10,16 +11,19 @@ import Portal from "./Portal";
 export const Modal = () => {
   const modalElem = useRecoilValue(modalComponentAtom);
   const [isModalOpen, setIsModalOpen] = useRecoilState(isModalOpenAtom);
+  // 윈도우사이즈(모바일에서 상단, 하단바를 제외한 실제 크기)
+  const { height } = useWindowSize();
 
   useEffect(() => {
     return () => {
-      window.removeEventListener("popstate", ()=>setIsModalOpen(false));
+      window.removeEventListener("popstate", () => setIsModalOpen(false));
     };
   }, []);
 
   return isModalOpen ? (
     <Portal>
       <ModalBackDrop
+        height={height}
         onClick={() => {
           history.back();
           setIsModalOpen(false);
@@ -38,8 +42,8 @@ export const Modal = () => {
   ) : null;
 };
 const ModalWrapper = styled.div`
-  width: calc(100% - 32px);
-  height: calc(90% - 32px);
+  width: calc(100% - 48px);
+  height: calc(100% - 48px);
   position: relative;
   padding: 16px;
   background-color: var(--pure-white);
@@ -49,7 +53,8 @@ const ModalWrapper = styled.div`
 const ModalBackDrop = styled.div`
   position: fixed;
   width: 100vw;
-  height: 100vh;
+  height: ${(props: { height?: number; width?: number }) =>
+    `${props.height}px`};
   left: 0;
   right: 0;
   display: flex;
