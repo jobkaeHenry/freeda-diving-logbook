@@ -10,6 +10,8 @@ import cors from "cors";
 import swaggerJsdoc from "swagger-jsdoc";
 import swaggerUi from "swagger-ui-express";
 import options from "./swaggerOption";
+import ExpressMongoSanitize from "express-mongo-sanitize";
+import apiLimiter from "./middleware/apiLimiter";
 
 // 환경변수사용
 dotenv.config();
@@ -17,9 +19,14 @@ const mongoDB_PW = process.env.MONGO_DB_PW;
 const specs = swaggerJsdoc(options);
 // express
 const app = express();
+// 요청횟수 리미터
+app.use(apiLimiter);
 // 헬맷 설정 필요
 app.use(helmet());
+// 바디파서
 app.use(bodyParser.json());
+// 리퀘스트 세니타이징
+app.use(ExpressMongoSanitize());
 
 app.use(
   cors({
@@ -30,7 +37,11 @@ app.use(
   })
 );
 
-app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(specs,{explorer: true}));
+app.use(
+  "/api-docs",
+  swaggerUi.serve,
+  swaggerUi.setup(specs, { explorer: true })
+);
 
 // 오픈된 라우팅
 app.use("/divelog", diveLogRoute);
