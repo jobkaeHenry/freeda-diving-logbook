@@ -31,7 +31,7 @@ export const signUp = async (
     password,
     nickName,
     image,
-    divelogs:[],
+    divelogs: [],
   });
 
   try {
@@ -52,13 +52,13 @@ export const signin = async (
   const { email, password } = req.body;
   let existingUser;
   try {
-    existingUser = await User.findOne({email:email});
+    existingUser = await User.findOne({ email: email });
   } catch (err) {
     return next(new HttpError("유저찾기 실패", 500));
   }
 
-  if(!existingUser || existingUser.password!==password){
-    return next(new HttpError("비밀번호가 일치하지 않습니다", 401))
+  if (!existingUser || existingUser.password !== password) {
+    return next(new HttpError("비밀번호가 일치하지 않습니다", 401));
   }
-  res.json({message:"로그인 성공~"})
+  res.status(200).json(existingUser.toObject({ getters: true }));
 };

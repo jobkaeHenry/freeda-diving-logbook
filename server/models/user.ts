@@ -1,4 +1,4 @@
-import { model, Schema } from "mongoose";
+import mongoose, { model, Schema } from "mongoose";
 import uniqueValidator from "mongoose-unique-validator";
 
 const userSchema = new Schema({
@@ -7,7 +7,7 @@ const userSchema = new Schema({
   password: { type: String, require: true, minlength: 8 },
   nickName: { type: String, require: true },
   image: { type: String, require: false },
-  divelogs: [{ type: String, require: true, ref:'DiveLog' }],
+  divelogs: [{ type: mongoose.Types.ObjectId, require: true, ref: "DiveLog" }],
 });
 // 고유 값인지 검증하는 mongoose Validator
 userSchema.plugin(uniqueValidator);
