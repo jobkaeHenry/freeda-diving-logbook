@@ -1,4 +1,4 @@
-import { isModalOpenAtom, modalComponentAtom } from "@/recoil/atom/globalModalAtom";
+import { isModalOpenAtom, modalComponentAtom } from "@/context/recoil/atom/globalModalAtom";
 import { useRecoilState } from "recoil";
 
 

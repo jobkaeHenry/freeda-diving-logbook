@@ -1,8 +1,6 @@
+import { isModalOpenAtom, modalComponentAtom } from "@/context/recoil/atom/globalModalAtom";
 import useWindowSize from "@/hooks/useWindowSize";
-import {
-  isModalOpenAtom,
-  modalComponentAtom,
-} from "@/recoil/atom/globalModalAtom";
+
 import styled from "@emotion/styled";
 import { useEffect } from "react";
 import { useRecoilValue, useRecoilState } from "recoil";

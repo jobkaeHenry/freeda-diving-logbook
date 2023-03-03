@@ -7,7 +7,7 @@ import Text from "@/components/atom/Text";
 import { css } from "@emotion/react";
 import { DiveLogTypes } from "@/types/DiveLogTypes";
 import { useSetRecoilState } from "recoil";
-import { isModalOpenAtom } from "@/recoil/atom/globalModalAtom";
+import { isModalOpenAtom } from "@/context/recoil/atom/globalModalAtom";
 
 type Props = {
   currentValue: string;

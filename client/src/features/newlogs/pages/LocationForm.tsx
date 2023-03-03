@@ -13,7 +13,7 @@ import InputWithLabel from "../../../components/form/InputWithLabel";
 import { ColumnWrapper, RowWrapper } from "../../../layouts/Wrapper";
 import FixedMap from "../../../services/GoogleMap/FixedMap";
 import { useSetRecoilState } from "recoil";
-import { isModalOpenAtom } from "@/recoil/atom/globalModalAtom";
+import { isModalOpenAtom } from "@/context/recoil/atom/globalModalAtom";
 
 type Props = Pick<DiveLogTypes, "location" | "weatherInfo" | "diveInfo"> & {
   updateFields: (
