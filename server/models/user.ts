@@ -1,5 +1,5 @@
 import { model, Schema } from "mongoose";
-import uniqueValidator from "mongoose-unique-validator"
+import uniqueValidator from "mongoose-unique-validator";
 
 const userSchema = new Schema({
   // unique 를 추가 할 경우, 이메일에 고유 키값을 생성해 빠르게 찾을 수 있음
@@ -7,9 +7,9 @@ const userSchema = new Schema({
   password: { type: String, require: true, minlength: 8 },
   nickName: { type: String, require: true },
   image: { type: String, require: false },
-  divelog: { type: String, require: true },
+  divelogs: [{ type: String, require: true, ref:'DiveLog' }],
 });
 // 고유 값인지 검증하는 mongoose Validator
-userSchema.plugin(uniqueValidator)
+userSchema.plugin(uniqueValidator);
 
 export const User = model("User", userSchema);

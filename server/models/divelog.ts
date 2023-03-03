@@ -1,7 +1,7 @@
-import { model, Schema } from "mongoose";
+import mongoose, { model, Schema } from "mongoose";
 
 const divLogSchema = new Schema({
-  author: { type: String, require: true },
+  author: { type: mongoose.Types.ObjectId, require: true, ref: "User" },
   diveType: { type: String, require: true },
   location: {
     title: { type: String, required: true },
@@ -41,8 +41,8 @@ const divLogSchema = new Schema({
   },
   personal: {
     waterTemp: { type: String, required: true },
-    content: { type: String||undefined, required: false },
-    image: { type: String||undefined, require: false },
+    content: { type: String || undefined, required: false },
+    image: { type: String || undefined, require: false },
   },
 });
 

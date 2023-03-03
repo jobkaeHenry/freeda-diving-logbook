@@ -50,10 +50,27 @@ export const getDiveLogById = async (
   res.json(diveLog.toObject({ getters: true }));
 };
 
-export const getDiveLogByUserId = async (
+export const getDiveLogsByUserId = async (
   req: Request,
   res: Response,
   next: NextFunction
 ) => {
-  const userId = DiveLog.find;
+  const userId = req.body.id;
+
+  let findDivelogByUserId;
+  try {
+    findDivelogByUserId = await DiveLog.find({ author: userId }, "location");
+  } catch (err) {
+    next(new HttpError("찾지 못했습니다", 500));
+  }
+  if (!findDivelogByUserId) {
+    next(new HttpError("찾지 못했습니다", 404));
+  } else
+    return res
+      .status(200)
+      .json(
+        findDivelogByUserId.map((divelog) =>
+          divelog.toObject({ getters: true })
+        )
+      );
 };
