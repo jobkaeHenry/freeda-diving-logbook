@@ -4,7 +4,7 @@ import TextInput from "@/components/atom/TextInput";
 import SearchIcon from "@/assets/searchIcon.svg";
 import { DiveLogTypes } from "@/types/DiveLogTypes";
 import { useTranslation } from "react-i18next";
-import FormLayout from "../layout/FormLayout";
+import FormLayout from "../../../layouts/newlog/FormLayout";
 import { WeatherTypeGuard } from "../utils/typeguard";
 import useModal from "@/hooks/useModal";
 import { Modal } from "@/components/GlobalModal/Modal";

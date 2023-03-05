@@ -3,15 +3,15 @@ import { Button } from "@/components/atom/Button";
 import Navbar from "@/components/Navbar/Navbar";
 import FixedBottomCTA from "@/layouts/FixedBottomCTA";
 import { FormEvent, useCallback, useState } from "react";
-import PaddingLayout from "@/features/newlogs/layout/PaddingLayout";
-import DiveTypeForm from "@/features/newlogs/pages/DiveTypeForm";
+import PaddingLayout from "@/layouts/PaddingLayout";
+import DiveTypeForm from "@/features/newlogs/multistepForm/DiveTypeForm";
 import useMultistepForm from "@/hooks/useMultistepForm";
 
-import LocationForm from "@/features/newlogs/pages/LocationForm";
-import DepthForm from "@/features/newlogs/pages/DepthForm";
-import AirUsageForm from "@/features/newlogs/pages/AirUsageForm";
-import GearForm from "@/features/newlogs/pages/GearForm";
-import PersonalForm from "@/features/newlogs/pages/PersonalForm";
+import LocationForm from "@/features/newlogs/multistepForm/LocationForm";
+import DepthForm from "@/features/newlogs/multistepForm/DepthForm";
+import AirUsageForm from "@/features/newlogs/multistepForm/AirUsageForm";
+import GearForm from "@/features/newlogs/multistepForm/GearForm";
+import PersonalForm from "@/features/newlogs/multistepForm/PersonalForm";
 
 import scubaDiveModel from "@/features/newlogs/data/scubaDiveModel";
 import { DiveLogTypes } from "@/types/DiveLogTypes";

@@ -1,14 +1,13 @@
 import SectionHeading from "@/components/SectionHeading";
 import styled from "@emotion/styled";
 import React from "react";
+import PaddingLayout from "../PaddingLayout";
 
 type Props = {
   children: React.ReactNode | React.ReactNode[];
 };
 
-const LogsLayOut = styled.div`
-  padding: 0 16px;
-`;
+const LogsLayOut = PaddingLayout
 interface SelectiveInterface extends Props {
   validation: boolean;
 }

@@ -17,3 +17,5 @@ export const ColumnWrapper = styled.div`
   gap: ${(props: WrapperProps) => (props.noGap ? "0" : "8px")};
   justify-content: center;
 `;
+
+export const PaddingWrapper = styled
