@@ -14,7 +14,7 @@ import options from "./swaggerOption";
 // 환경변수사용
 dotenv.config();
 const mongoDB_PW = process.env.MONGO_DB_PW;
-const specs = swaggerJsdoc(options);
+
 // express
 const app = express();
 // 헬맷 설정 필요
@@ -29,7 +29,7 @@ app.use(
     methods: ["GET", "POST"],
   })
 );
-
+const specs = swaggerJsdoc(options);
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(specs,{explorer: true}));
 
 // 오픈된 라우팅
