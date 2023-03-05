@@ -1,13 +1,14 @@
+import { TypographyType } from "@/types/typography";
 import styled from "@emotion/styled";
 
-interface TextProps
+export interface TextProps
   extends React.DetailedHTMLProps<
     React.ButtonHTMLAttributes<HTMLSpanElement>,
     HTMLSpanElement
   > {
-  typography: "h1" | "h2" | "h3" | "h4"| "p" | "sub";
+  typography: TypographyType;
   bold?: boolean;
-  weight?:string;
+  weight?: string;
   align?: string;
   color?: string;
 }

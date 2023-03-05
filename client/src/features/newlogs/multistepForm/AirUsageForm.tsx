@@ -6,7 +6,7 @@ import styled from "@emotion/styled";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import AirUsageIndicator from "../components/AirUsageIndicator";
-import FormLayout from "../layout/FormLayout";
+import FormLayout from "../../../layouts/newlog/FormLayout";
 import { RowWrapper } from "../../../layouts/Wrapper";
 
 type Props = Pick<DiveLogTypes, "diveInfo"> & {

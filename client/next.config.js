@@ -19,5 +19,7 @@ const nextConfig = {
     defaultLocale: "ko",
   },
 };
-
+module.exports = {
+  i18n,
+}
 module.exports = nextConfig;

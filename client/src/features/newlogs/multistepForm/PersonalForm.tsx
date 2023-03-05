@@ -4,7 +4,7 @@ import Text from "@/components/atom/Text";
 import TextArea from "@/components/atom/TextArea";
 import { DiveLogTypes } from "@/types/DiveLogTypes";
 import { useTranslation } from "react-i18next";
-import FormLayout from "../layout/FormLayout";
+import FormLayout from "../../../layouts/newlog/FormLayout";
 
 type Props = Pick<DiveLogTypes, "personal" | "weatherInfo"> & {
   updateFields: (field: Pick<DiveLogTypes, "personal" & "weatherInfo">) => void;

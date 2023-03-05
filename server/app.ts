@@ -16,7 +16,7 @@ import apiLimiter from "./middleware/apiLimiter";
 // 환경변수사용
 dotenv.config();
 const mongoDB_PW = process.env.MONGO_DB_PW;
-const specs = swaggerJsdoc(options);
+
 // express
 const app = express();
 // 요청횟수 리미터

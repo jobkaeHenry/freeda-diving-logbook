@@ -1,18 +1,17 @@
-import TextInput from "@/components/atom/TextInput";
-import React, { InputHTMLAttributes } from "react";
+import TextInput, { TextInputProp } from "@/components/atom/TextInput";
 import Text from "@/components/atom/Text";
 import { RowWrapper } from "../../layouts/Wrapper";
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 
-type Props = InputHTMLAttributes<HTMLInputElement> & {
+type InputWithLabelProps = TextInputProp & {
   unit?: string;
   inputWidth?: string;
   label: string;
-  validation?:boolean
+  validation?: boolean;
 };
 
-const InputWithLabel = (props: Props) => {
+const InputWithLabel = (props: InputWithLabelProps) => {
   const { unit, label, inputWidth, ...otherProps } = props;
   return (
     <LabelWrapper>

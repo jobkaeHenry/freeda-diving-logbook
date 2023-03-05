@@ -1,45 +1,48 @@
+import { FontWeightType } from "@/types/typography";
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 import React, { InputHTMLAttributes } from "react";
 
-
-interface Props extends InputHTMLAttributes<HTMLInputElement> {
+export interface TextInputProp
+  extends Omit<InputHTMLAttributes<HTMLInputElement>, "onClick"> {
   icon?: any;
   width?: string;
   error?: boolean;
+  weight?: FontWeightType;
+  onClick?: (e: React.MouseEvent<HTMLElement>) => void;
 }
 
-const TextInput = (props: Props) => {
+const TextInput = (props: TextInputProp) => {
   const Icon = props.icon;
+  const { width, error, onClick, ...others } = props;
   return (
     <InputWrapper
       css={css`
         position: relative;
-        width: ${props.width};
+        width: ${width};
       `}
     >
-      <Input type={"text"} {...props} />
-      {Icon ? (
+      <Input type={"text"} {...others} />
+      {Icon && (
         <Icon
           css={css`
             position: absolute;
             right: 8px;
           `}
-          onClick={props.onClick}
+          onClick={onClick}
         />
-      ) : (
-        <></>
       )}
     </InputWrapper>
   );
 };
 
 const Input = styled.input`
-  &{
+  & {
     padding: 16px;
-    padding-right: ${(props: Props) => (props.icon ? "48px" : "")};
+    padding-right: ${(props: TextInputProp) => (props.icon ? "48px" : "")};
     outline-style: solid;
     outline-width: 1px;
+    font-weight: ${(props) => (props.weight ? props.weight : "var(--bold)")};
     width: 100%;
     outline-color: var(--line-gray);
     border-radius: 6px;
