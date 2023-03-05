@@ -1,5 +1,4 @@
 import { Request, Response, NextFunction } from "express";
-import { dummy } from "../models/dummy";
 import HttpError from "../models/error";
 import { User } from "../models/user";
 
