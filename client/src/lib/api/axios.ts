@@ -13,7 +13,6 @@ if (process.env.NODE_DEV === "production") {
 }else if (process.env.NODE_ENV ==="development"){
   axios.defaults.baseURL = BASE_URL_DEV;
 }
-console.log(process.env.NODE_ENV)
 
 /**쿠키를 싣고가야하는 요청 axios */
 export const axiosPrivate = axios.create({
