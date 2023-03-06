@@ -11,10 +11,13 @@ export const createDiveLog = async (
 ) => {
   const { diveType, location, weatherInfo, diveInfo, personal, author } =
     req.body;
+
+  const userId = req.userData?.userId;
+
   //express-validator 추가하기
   // if (diveType === "scuba") {
   const createdDiveLog = new DiveLog({
-    author,
+    author: userId,
     diveType,
     location,
     weatherInfo,

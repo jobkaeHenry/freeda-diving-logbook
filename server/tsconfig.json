@@ -1,5 +1,7 @@
 {
+  "ts-node": { "files": true },
   "compilerOptions": {
+    "typeRoots": ["./node_modules/@types", "src/@types"],
     "target": "es6",
     "module": "commonjs",
     "outDir": "./dist",

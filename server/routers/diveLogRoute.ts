@@ -17,7 +17,7 @@ const router = express.Router();
 router.get("/:id", getDiveLogById);
 router.get("/", getDiveLogsByUserId);
 
-router.use(authChecker as RequestHandler);
+router.use(authChecker);
 router.post("/", createDiveLog);
 router.delete("/:id", deleteDivelogById);
 export default router;
