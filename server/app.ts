@@ -1,4 +1,5 @@
-import express from "express";
+import express, { NextFunction } from "express";
+import type { ErrorRequestHandler } from "express";
 import bodyParser from "body-parser";
 import userRouter from "./routers/userRoute";
 import helmet from "helmet";
@@ -12,6 +13,7 @@ import swaggerUi from "swagger-ui-express";
 import options from "./swaggerOption";
 import ExpressMongoSanitize from "express-mongo-sanitize";
 import apiLimiter from "./middleware/apiLimiter";
+import HttpError from "./models/error";
 
 // 환경변수사용
 dotenv.config();
@@ -49,6 +51,14 @@ app.use("/divelog", diveLogRoute);
 // 보호된 라우팅 - authCheck
 // app.use(authChecker);
 app.use("/user", userRouter);
+
+// 에러핸들러
+app.use(((err, req, res, next) => {
+  if (res.headersSent) {
+    return next(err);
+  }
+  res.status(err.code || 500).json({ message: err.message });
+}) as ErrorRequestHandler);
 
 mongoose
   .connect(

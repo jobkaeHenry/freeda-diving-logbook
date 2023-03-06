@@ -53,11 +53,16 @@ export const login = async (
   try {
     existingUser = await User.findOne({ email: email });
   } catch (err) {
-    return next(new HttpError("유저찾기 실패", 500));
+    const error = new HttpError("유저찾기 실패", 500);
+    return next(error);
   }
-
+  if (!existingUser) {
+    const error = new HttpError("존재하지 않는 유저입니다", 401);
+    return next(error);
+  }
   if (!existingUser || existingUser.password !== password) {
-    return next(new HttpError("비밀번호가 일치하지 않습니다", 401));
+    const error = new HttpError("비밀번호가 일치하지않습니다", 401);
+    return next(error);
   }
   res.status(200).json(existingUser.toObject({ getters: true }));
 };

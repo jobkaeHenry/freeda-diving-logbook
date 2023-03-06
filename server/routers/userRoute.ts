@@ -1,5 +1,4 @@
 import express from "express";
-import HttpError from "../models/error";
 import { login, signUp } from "../controllers/user-Controller";
 
 const router = express.Router();
