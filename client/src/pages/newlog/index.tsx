@@ -79,7 +79,7 @@ const DiveForm = ({ existingData }: Props) => {
       axios.post(createLogServer, data).then((res) => {
         // axiosPrivate.post(createLog, data).then((res) => {
         console.log(res);
-        router.replace(`/${getDiveLog}/${res.data.id}`);
+        router.replace(`${getDiveLog}/${res.data.id}`);
       });
     }
     next();

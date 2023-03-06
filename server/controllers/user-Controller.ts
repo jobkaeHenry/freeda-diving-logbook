@@ -42,7 +42,7 @@ export const signUp = async (
   res.status(201).json({ message: "유저가 생성됬습니다" });
 };
 
-export const signin = async (
+export const login = async (
   req: Request,
   res: Response,
   next: NextFunction
