@@ -4,7 +4,7 @@ import bodyParser from "body-parser";
 import userRouter from "./routers/userRoute";
 import helmet from "helmet";
 import mongoose from "mongoose";
-import authChecker from "./controllers/check-auth";
+import authChecker from "./middleware/authChecker";
 import dotenv from "dotenv";
 import diveLogRoute from "./routers/diveLogRoute";
 import cors from "cors";
@@ -48,8 +48,6 @@ app.use(
 // 오픈된 라우팅
 app.use("/divelog", diveLogRoute);
 
-// 보호된 라우팅 - authCheck
-// app.use(authChecker);
 app.use("/user", userRouter);
 
 // 에러핸들러

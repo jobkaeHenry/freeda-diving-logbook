@@ -2,6 +2,11 @@ import { Request, Response, NextFunction } from "express";
 import HttpError from "../models/error";
 import { User } from "../models/user";
 import bcrypt from "bcryptjs";
+import jwt from "jsonwebtoken";
+import dotenv from "dotenv";
+
+dotenv.config();
+const JWT_SECRET_KEY = process.env.JWT_SECRET_KEY;
 
 export const signUp = async (
   req: Request,
@@ -48,7 +53,25 @@ export const signUp = async (
     const error = new HttpError("유저 생성에 실패했습니다", 500);
     next(error);
   }
-  res.status(201).json({ createdUser });
+
+  let token;
+  try {
+    token = jwt.sign(
+      { userId: createdUser.id, email: createdUser.email },
+      JWT_SECRET_KEY as string,
+      { expiresIn: "1h" }
+    );
+  } catch (err) {
+    const error = new HttpError("토큰 생성에 실패했습니다", 500);
+    next(error);
+  }
+
+  res.status(201).json({
+    userId: createdUser.id,
+    nickName: createdUser.nickName,
+    image: createdUser.image,
+    accessToken: token,
+  });
 };
 
 export const login = async (
@@ -88,5 +111,22 @@ export const login = async (
     return next(error);
   }
 
-  res.status(200).json(existingUser.toObject({ getters: true }));
+  let token;
+  try {
+    token = jwt.sign(
+      { userId: existingUser.id, email: existingUser.email },
+      JWT_SECRET_KEY as string,
+      { expiresIn: "1h" }
+    );
+  } catch (err) {
+    const error = new HttpError("토큰 생성에 실패했습니다", 500);
+    next(error);
+  }
+
+  res.status(200).json({
+    userId: existingUser.id,
+    nickName: existingUser.nickName,
+    image: existingUser.image,
+    accessToken: token,
+  });
 };
