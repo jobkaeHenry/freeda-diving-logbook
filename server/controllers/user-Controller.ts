@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import HttpError from "../models/error";
 import { User } from "../models/user";
+import bcrypt from "bcryptjs";
 
 export const signUp = async (
   req: Request,
@@ -25,9 +26,17 @@ export const signUp = async (
     return next(new HttpError("이미 존재하는 유저입니다", 422));
   }
 
+  let hashedPassword;
+  try {
+    hashedPassword = await bcrypt.hash(password, 12);
+  } catch (err) {
+    const error = new HttpError("비밀번호 해싱에 실패했습니다", 500);
+    next(error);
+  }
+
   const createdUser = new User({
     email,
-    password,
+    password: hashedPassword,
     nickName,
     image,
     divelogs: [],
@@ -39,7 +48,7 @@ export const signUp = async (
     const error = new HttpError("유저 생성에 실패했습니다", 500);
     next(error);
   }
-  res.status(201).json({ message: "유저가 생성됬습니다" });
+  res.status(201).json({ createdUser });
 };
 
 export const login = async (
@@ -49,6 +58,7 @@ export const login = async (
 ) => {
   // 엠티체크 해야함
   const { email, password } = req.body;
+
   let existingUser;
   try {
     existingUser = await User.findOne({ email: email });
@@ -56,13 +66,27 @@ export const login = async (
     const error = new HttpError("유저찾기 실패", 500);
     return next(error);
   }
+
   if (!existingUser) {
     const error = new HttpError("존재하지 않는 유저입니다", 401);
     return next(error);
   }
-  if (!existingUser || existingUser.password !== password) {
+
+  let isValidPassword = false;
+  try {
+    isValidPassword = await bcrypt.compare(
+      password,
+      existingUser.password as string
+    );
+  } catch (err) {
+    const error = new HttpError("비밀번호 비교에 실패했습니다", 500);
+    return next(error);
+  }
+
+  if (!isValidPassword) {
     const error = new HttpError("비밀번호가 일치하지않습니다", 401);
     return next(error);
   }
+
   res.status(200).json(existingUser.toObject({ getters: true }));
 };
