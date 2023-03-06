@@ -26,6 +26,7 @@ const Login = (props: Props) => {
   const [showPassword, setShowPassword] = useState(false);
   const { t } = useTranslation("user");
   const router = useRouter();
+  const [serverError, setServerError] = useState("");
 
   // 훅 폼
   const {
@@ -38,15 +39,21 @@ const Login = (props: Props) => {
     axiosPrivate
       .post(login, data)
       .then(() => {
-        if (window.history.length < 2) {
-          router.replace("/");
-        } else {
-          router.back();
-        }
+        // if (window.history.length < 2) {
+        //   router.replace("/");
+        // } else {
+        //   router.back();
+        // }
+        alert("로그인성공")
       })
       .catch((err) => {
-        console.log(err);
-        console.log(errors);
+        const ErrorCode = err?.response?.status;
+        if (ErrorCode > 499) {
+          setServerError("server Error");
+        }
+        if (ErrorCode === 401) {
+          setServerError("wrong Password");
+        }
       });
   };
 
@@ -84,7 +91,9 @@ const Login = (props: Props) => {
         />
         {/* onCheck 핸들러 달아야함 */}
         <Checkbox label={t("자동로그인")} />
-
+        <Text role={"alert"} typography={"p"} color={"var(--alert-red)"}>
+          {serverError}
+        </Text>
         <Button type="submit">{t("로그인")}</Button>
 
         <Link href={signUp}>
