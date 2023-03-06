@@ -1,1 +1,3 @@
-export const login = "/user/login";
+export const login = "/user/login" as const;
+
+export const signUp = "/user/signup" as const;

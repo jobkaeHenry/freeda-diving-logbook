@@ -18,7 +18,7 @@ import { DiveLogTypes } from "@/types/DiveLogTypes";
 import axios, { axiosPrivate } from "@/lib/api/axios";
 
 import { useRouter } from "next/router";
-import { getDiveLog } from "@/data/URL/local/divelog/url";
+import { getDiveLogPage } from "@/data/URL/local/divelog/url";
 import { GetStaticPropsContext } from "next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "next-i18next";
@@ -79,7 +79,7 @@ const DiveForm = ({ existingData }: Props) => {
       axios.post(createLogServer, data).then((res) => {
         // axiosPrivate.post(createLog, data).then((res) => {
         console.log(res);
-        router.replace(`${getDiveLog}/${res.data.id}`);
+        router.replace(`${getDiveLogPage}/${res.data.id}`);
       });
     }
     next();

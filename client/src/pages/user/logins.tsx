@@ -10,38 +10,62 @@ import Text from "@/components/atom/Text";
 import { GetStaticPropsContext } from "next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useRouter } from "next/router";
+import { login, signUp } from "@/data/URL/local/user/url";
+import { useForm, Resolver, SubmitHandler } from "react-hook-form";
+import { emailRegExp, passwordRegExp } from "@/utils/regExp";
+import { axiosPrivate } from "@/lib/api/axios";
+
+type FormValues = {
+  email: string;
+  password: string;
+};
 
 type Props = {};
 
 const Login = (props: Props) => {
-  const [userInput, setUserInput] = useState<string>();
   const [showPassword, setShowPassword] = useState(false);
   const { t } = useTranslation("user");
   const router = useRouter();
 
-  const submitHandler = (e: React.FormEvent<HTMLElement>) => {
-    e.preventDefault();
-    console.log(window.history);
-    if (window.history.length < 2) {
-      router.replace("/");
-    } else {
-      router.back();
-    }
+  // 훅 폼
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormValues>();
+
+  const onSubmit: SubmitHandler<FormValues> = (data) => {
+    axiosPrivate
+      .post(login, data)
+      .then(() => {
+        if (window.history.length < 2) {
+          router.replace("/");
+        } else {
+          router.back();
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        console.log(errors);
+      });
   };
 
   return (
     <>
-      <MobileWrapper as={"form"} onSubmit={submitHandler}>
+      <MobileWrapper as={"form"} onSubmit={handleSubmit(onSubmit)}>
         <InputWithLabel
           type={"email"}
           inputWidth={"100%"}
           weight={"var(--regular)"}
           label={t("이메일")}
           placeholder={t("이메일")}
-          onBlur={(e) => {
-            setUserInput(e.target.value);
-          }}
-        ></InputWithLabel>
+          // 이메일 훅폼
+          error={errors.email ? true : false}
+          {...register("email", {
+            required: true,
+            pattern: emailRegExp,
+          })}
+        />
 
         <InputWithLabel
           type={showPassword ? "text" : "password"}
@@ -50,14 +74,20 @@ const Login = (props: Props) => {
           weight={"var(--regular)"}
           placeholder={t("비밀번호")}
           icon={EyeIcon}
+          error={errors.password ? true : false}
           onClick={() => setShowPassword((prev) => !prev)}
-        ></InputWithLabel>
-
+          // 패스워드 훅폼
+          {...register("password", {
+            required: true,
+            pattern: passwordRegExp,
+          })}
+        />
+        {/* onCheck 핸들러 달아야함 */}
         <Checkbox label={t("자동로그인")} />
 
         <Button type="submit">{t("로그인")}</Button>
-        {userInput}
-        <Link href={"/user/signup"}>
+
+        <Link href={signUp}>
           <Text typography={"p"} color={"var(--font-gray)"}>
             {t("계정이 없으신가요?")}
             <Text typography={"p"} color={"var(--main)"} bold>

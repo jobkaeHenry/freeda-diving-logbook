@@ -1,3 +1,3 @@
-export const newLog = '/newlog' as const
+export const newLogPage = '/newlog' as const
 
-export const getDiveLog = '/divelog' as const
+export const getDiveLogPage = '/divelog' as const

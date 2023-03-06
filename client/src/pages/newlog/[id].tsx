@@ -1,6 +1,6 @@
 import { DiveLogTypes, ServerSideDiveLogType } from "@/types/DiveLogTypes";
 import axios, { axiosPrivate } from "@/lib/api/axios";
-import { getDiveLog } from "@/data/URL/local/divelog/url";
+import { getDiveLogPage } from "@/data/URL/local/divelog/url";
 import { GetServerSidePropsContext } from "next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
@@ -11,7 +11,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   // 오버 패칭정보 제거
   const { id, _id, __v, author, ...data } = (
     await axios.get<ServerSideDiveLogType>(
-      `/${getDiveLog}/${context.query?.id}`
+      `/${getDiveLogPage}/${context.query?.id}`
     )
   ).data;
   

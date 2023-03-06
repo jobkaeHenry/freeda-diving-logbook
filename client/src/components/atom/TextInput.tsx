@@ -4,7 +4,7 @@ import styled from "@emotion/styled";
 import React, { InputHTMLAttributes } from "react";
 
 export interface TextInputProp
-  extends Omit<InputHTMLAttributes<HTMLInputElement>, "onClick"> {
+  extends Omit<InputHTMLAttributes<HTMLInputElement>, "onClick" | "pattern"> {
   icon?: any;
   width?: string;
   error?: boolean;
@@ -12,29 +12,32 @@ export interface TextInputProp
   onClick?: (e: React.MouseEvent<HTMLElement>) => void;
 }
 
-const TextInput = (props: TextInputProp) => {
-  const Icon = props.icon;
-  const { width, error, onClick, ...others } = props;
-  return (
-    <InputWrapper
-      css={css`
-        position: relative;
-        width: ${width};
-      `}
-    >
-      <Input type={"text"} {...others} />
-      {Icon && (
-        <Icon
-          css={css`
-            position: absolute;
-            right: 8px;
-          `}
-          onClick={onClick}
-        />
-      )}
-    </InputWrapper>
-  );
-};
+// eslint-disable-next-line react/display-name
+const TextInput = React.forwardRef(
+  (props: TextInputProp, ref: React.ForwardedRef<HTMLInputElement>) => {
+    const Icon = props.icon;
+    const { width, onClick, ...others } = props;
+    return (
+      <InputWrapper
+        css={css`
+          position: relative;
+          width: ${width};
+        `}
+      >
+        <Input type={"text"} ref={ref} {...others} />
+        {Icon && (
+          <Icon
+            css={css`
+              position: absolute;
+              right: 8px;
+            `}
+            onClick={onClick}
+          />
+        )}
+      </InputWrapper>
+    );
+  }
+);
 
 const Input = styled.input`
   & {
@@ -54,7 +57,10 @@ const Input = styled.input`
     color: var(--font-light-gray);
   }
   &:focus {
-    filter: drop-shadow(0px 0px 2px var(--main));
+    filter: ${(props) =>
+      props.error
+        ? "drop-shadow(0px 0px 2px var(--alert-red))"
+        : "drop-shadow(0px 0px 2px var(--main))"};
     color: var(--font-main);
   }
 `;

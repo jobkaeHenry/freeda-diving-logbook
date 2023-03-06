@@ -1,4 +1,4 @@
-import { getDiveLog, newLog } from "@/data/URL/local/divelog/url";
+import { getDiveLogPage, newLogPage } from "@/data/URL/local/divelog/url";
 import axios from "@/lib/api/axios";
 import { ServerSideDiveLogType } from "@/types/DiveLogTypes";
 import { GetServerSideProps } from "next";
@@ -38,7 +38,7 @@ const DiveLog = (props: Props) => {
           onClick={() =>
             onClickModal(
               <QRModal
-                value={`${freedaBaseURL}/${newLog}/${id}`}
+                value={`${freedaBaseURL}/${newLogPage}/${id}`}
                 author={data.author}
               />
             )
@@ -107,7 +107,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const { locale } = context;
 
   const { data } = await axios.get<ServerSideDiveLogType>(
-    `${getDiveLog}/${id}`
+    `${getDiveLogPage}/${id}`
   );
   return {
     props: {
