@@ -1,9 +1,11 @@
 {
   "계정이 없으신가요?": "Don't have an account?",
+  "이미 계정이 있으신가요?" : "Already have an account?",
 
   "이메일": "Email",
   "비밀번호": "Password",
-  "회원가입":"Signup",
+  "비밀번호 확인" : "Confirm Password",
+  "회원가입":"Sign up",
   "로그인":"Login",
   "자동로그인" :"Auto login",
   "이메일 기억하기":"Remember Email"
