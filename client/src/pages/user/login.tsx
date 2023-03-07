@@ -14,6 +14,7 @@ import { login, signUp } from "@/data/URL/local/user/url";
 import { useForm, Resolver, SubmitHandler } from "react-hook-form";
 import { emailRegExp, passwordRegExp } from "@/utils/regExp";
 import { axiosPrivate } from "@/lib/api/axios";
+import { setLS } from "@/utils/localStorage";
 
 type FormValues = {
   email: string;
@@ -38,13 +39,13 @@ const Login = (props: Props) => {
   const onSubmit: SubmitHandler<FormValues> = (data) => {
     axiosPrivate
       .post(login, data)
-      .then(() => {
-        // if (window.history.length < 2) {
-        //   router.replace("/");
-        // } else {
-        //   router.back();
-        // }
-        alert("로그인성공")
+      .then((res) => {
+        setLS("accessToken", res.data.accessToken);
+        if (window.history.length < 2) {
+          router.replace("/");
+        } else {
+          router.back();
+        }
       })
       .catch((err) => {
         const ErrorCode = err?.response?.status;
