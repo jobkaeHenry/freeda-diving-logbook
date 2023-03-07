@@ -15,7 +15,6 @@ import PersonalForm from "@/features/newlogs/multistepForm/PersonalForm";
 
 import scubaDiveModel from "@/features/newlogs/data/scubaDiveModel";
 import { DiveLogTypes } from "@/types/DiveLogTypes";
-import axios, { axiosPrivate } from "@/lib/api/axios";
 
 import { useRouter } from "next/router";
 import { getDiveLogPage } from "@/data/URL/local/divelog/url";
@@ -26,6 +25,7 @@ import { createLogServer } from "@/data/URL/server/newlog/createLog";
 
 import React from "react";
 import { json } from "stream/consumers";
+import useAxiosPrivate from "@/hooks/useAxiosPrivate";
 
 // const LocationForm = React.lazy(() => import('@/features/newlogs/pages/LocationForm'));
 // const DepthForm = React.lazy(() => import('@/features/newlogs/pages/DepthForm'));
@@ -54,14 +54,7 @@ const DiveForm = ({ existingData }: Props) => {
   );
   const { t } = useTranslation();
   const router = useRouter();
-  const [token, setToken] = useState<String | null>();
-
-  useEffect(() => {
-    let token = localStorage.getItem("accessToken");
-    if (token) {
-      setToken(JSON.parse(token));
-    }
-  }, []);
+  const axiosPrivate = useAxiosPrivate();
 
   const updateField = useCallback((field: Partial<DiveLogTypes>) => {
     setData((prev) => {
@@ -87,14 +80,12 @@ const DiveForm = ({ existingData }: Props) => {
       e.preventDefault();
       if (isLastStep) {
         axiosPrivate
-          .post(createLogServer, data, {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          })
+          .post(createLogServer, data)
           .then((res) => {
-            console.log(res);
             router.replace(`${getDiveLogPage}/${res.data.id}`);
+          })
+          .catch((err) => {
+            console.log(err.response.data.message);
           });
       }
       next();

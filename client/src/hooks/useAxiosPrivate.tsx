@@ -1,5 +1,5 @@
+
 import { axiosPrivate } from "@/lib/api/axios";
-import { getLS } from "@/utils/localStorage";
 import { useEffect } from "react";
 import useRefreshToken from "./useRefreshToken";
 
@@ -8,14 +8,15 @@ import useRefreshToken from "./useRefreshToken";
 //
 const useAxiosPrivate = () => {
   const refresh = useRefreshToken();
-  const accessToken = getLS("accessToken");
-
+  
   useEffect(() => {
     // 요청을 가로채는 인터셉터 (필요할때만 토큰을 싣기 위해)
+    const accessToken = localStorage.getItem("accessToken");
+    
     const requestIntercept = axiosPrivate.interceptors.request.use(
       (config) => {
-        if (config.headers && !config.headers["Authorization"]) {
-          config.headers.Authorization = `Bearer ${accessToken}`;
+        if (config.headers && !config.headers["Authorization"] && accessToken) {
+          config.headers.Authorization = `Bearer ${JSON.parse(accessToken)}`;
         }
         return config;
       },
@@ -41,7 +42,7 @@ const useAxiosPrivate = () => {
       axiosPrivate.interceptors.request.eject(requestIntercept);
       axiosPrivate.interceptors.response.eject(responseIntercept);
     };
-  }, [accessToken, refresh]);
+  }, [refresh]);
 
   return axiosPrivate;
 };

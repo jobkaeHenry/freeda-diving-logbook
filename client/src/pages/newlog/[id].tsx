@@ -11,7 +11,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   // 오버 패칭정보 제거
   const { id, _id, __v, author, ...data } = (
     await axios.get<ServerSideDiveLogType>(
-      `/${getDiveLogPage}/${context.query?.id}`
+      `${getDiveLogPage}/${context.query?.id}`
     )
   ).data;
   
