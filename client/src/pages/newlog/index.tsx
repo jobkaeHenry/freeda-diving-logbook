@@ -2,7 +2,7 @@
 import { Button } from "@/components/atom/Button";
 import Navbar from "@/components/Navbar/Navbar";
 import FixedBottomCTA from "@/layouts/FixedBottomCTA";
-import { FormEvent, useCallback, useState } from "react";
+import { FormEvent, useCallback, useEffect, useState } from "react";
 import PaddingLayout from "@/layouts/PaddingLayout";
 import DiveTypeForm from "@/features/newlogs/multistepForm/DiveTypeForm";
 import useMultistepForm from "@/hooks/useMultistepForm";
@@ -25,6 +25,7 @@ import { useTranslation } from "next-i18next";
 import { createLogServer } from "@/data/URL/server/newlog/createLog";
 
 import React from "react";
+import { json } from "stream/consumers";
 
 // const LocationForm = React.lazy(() => import('@/features/newlogs/pages/LocationForm'));
 // const DepthForm = React.lazy(() => import('@/features/newlogs/pages/DepthForm'));
@@ -53,6 +54,14 @@ const DiveForm = ({ existingData }: Props) => {
   );
   const { t } = useTranslation();
   const router = useRouter();
+  const [token, setToken] = useState<String | null>();
+
+  useEffect(() => {
+    let token = localStorage.getItem("accessToken");
+    if (token) {
+      setToken(JSON.parse(token));
+    }
+  }, []);
 
   const updateField = useCallback((field: Partial<DiveLogTypes>) => {
     setData((prev) => {
@@ -73,18 +82,26 @@ const DiveForm = ({ existingData }: Props) => {
     existingData ? 3 : 0
   );
 
-  const onSubmit = useCallback((e: FormEvent) => {
-    e.preventDefault();
-    if (isLastStep) {
-      axios.post(createLogServer, data).then((res) => {
-        // axiosPrivate.post(createLog, data).then((res) => {
-        console.log(res);
-        router.replace(`${getDiveLogPage}/${res.data.id}`);
-      });
-    }
-    next();
-  }, [isLastStep]);
-  
+  const onSubmit = useCallback(
+    (e: FormEvent) => {
+      e.preventDefault();
+      if (isLastStep) {
+        axiosPrivate
+          .post(createLogServer, data, {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          })
+          .then((res) => {
+            console.log(res);
+            router.replace(`${getDiveLogPage}/${res.data.id}`);
+          });
+      }
+      next();
+    },
+    [isLastStep]
+  );
+
   return (
     <>
       <Navbar />
