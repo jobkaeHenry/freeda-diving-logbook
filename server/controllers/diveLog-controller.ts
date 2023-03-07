@@ -9,7 +9,7 @@ export const createDiveLog = async (
   res: Response,
   next: NextFunction
 ) => {
-  const { diveType, location, weatherInfo, diveInfo, personal, author } =
+  const { diveType, location, weatherInfo, diveInfo, personal } =
     req.body;
 
   const userId = req.userData?.userId;
@@ -27,7 +27,7 @@ export const createDiveLog = async (
   // 유저가 실존하는지 검증
   let ActualUser;
   try {
-    ActualUser = await User.findById(author);
+    ActualUser = await User.findById(userId);
   } catch (err) {
     return next(
       new HttpError("유저를 검증하는 과정에서 오류가 발생했습니다", 500)

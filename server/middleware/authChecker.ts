@@ -19,8 +19,7 @@ const authChecker = (req: Request, res: Response, next: NextFunction) => {
       JWT_SECRET_KEY as Secret
     ) as TokenPayload;
 
-    req.userData.userId = decodedToken.userId;
-
+    req.userData = { userId: decodedToken.userId };
     next();
   } catch (err) {
     next(new HttpError("토큰이 첨부되지 않았습니다", 400));
