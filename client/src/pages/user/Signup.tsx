@@ -7,14 +7,11 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import EyeIcon from "@/assets/eyeIcon.svg";
-import Checkbox from "@/components/atom/Checkbox";
 import { Button } from "@/components/atom/Button";
 import Text from "@/components/atom/Text";
 import Link from "next/link";
 import { GetStaticPropsContext } from "next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import { setLS } from "@/utils/localStorage";
 
 type FormValues = {
   email: string;
