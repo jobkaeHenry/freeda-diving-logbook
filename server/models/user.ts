@@ -8,6 +8,7 @@ const userSchema = new Schema({
   nickName: { type: String, require: true },
   image: { type: String, require: false },
   divelogs: [{ type: mongoose.Types.ObjectId, require: true, ref: "DiveLog" }],
+  refreshToken: { type: String },
 });
 // 고유 값인지 검증하는 mongoose Validator
 userSchema.plugin(uniqueValidator);

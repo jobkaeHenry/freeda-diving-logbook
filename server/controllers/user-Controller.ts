@@ -2,11 +2,8 @@ import { Request, Response, NextFunction } from "express";
 import HttpError from "../models/error";
 import { User } from "../models/user";
 import bcrypt from "bcryptjs";
-import jwt from "jsonwebtoken";
-import dotenv from "dotenv";
-
-dotenv.config();
-const JWT_SECRET_KEY = process.env.JWT_SECRET_KEY;
+import jwt, { Secret } from "jsonwebtoken";
+import { createAccToken, createRefreshToken } from "../utils/tokenGenerator";
 
 export const signUp = async (
   req: Request,
@@ -45,7 +42,13 @@ export const signUp = async (
     nickName,
     image,
     divelogs: [],
+    refreshToken: "",
   });
+
+  const accessToken = createAccToken(createdUser.id);
+  const refreshToken = createRefreshToken(createdUser.id);
+
+  createdUser.refreshToken = refreshToken;
 
   try {
     await createdUser.save();
@@ -54,23 +57,12 @@ export const signUp = async (
     next(error);
   }
 
-  let token;
-  try {
-    token = jwt.sign(
-      { userId: createdUser.id, email: createdUser.email },
-      JWT_SECRET_KEY as string,
-      { expiresIn: "1h" }
-    );
-  } catch (err) {
-    const error = new HttpError("토큰 생성에 실패했습니다", 500);
-    next(error);
-  }
-
   res.status(201).json({
     userId: createdUser.id,
     nickName: createdUser.nickName,
     image: createdUser.image,
-    accessToken: token,
+    accessToken,
+    refreshToken,
   });
 };
 
@@ -91,7 +83,7 @@ export const login = async (
   }
 
   if (!existingUser) {
-    const error = new HttpError("존재하지 않는 유저입니다", 401);
+    const error = new HttpError("존재하지 않는 유저입니다", 403);
     return next(error);
   }
 
@@ -107,26 +99,35 @@ export const login = async (
   }
 
   if (!isValidPassword) {
-    const error = new HttpError("비밀번호가 일치하지않습니다", 401);
+    const error = new HttpError("비밀번호가 일치하지않습니다", 403);
     return next(error);
   }
 
-  let token;
-  try {
-    token = jwt.sign(
-      { userId: existingUser.id, email: existingUser.email },
-      JWT_SECRET_KEY as string,
-      { expiresIn: "1h" }
-    );
-  } catch (err) {
-    const error = new HttpError("토큰 생성에 실패했습니다", 500);
-    next(error);
-  }
-
+  const accessToken = createAccToken(existingUser.id);
+  const refreshToken = createRefreshToken(existingUser.id);
+  
   res.status(200).json({
     userId: existingUser.id,
     nickName: existingUser.nickName,
     image: existingUser.image,
-    accessToken: token,
+    accessToken,
+    refreshToken,
+  });
+};
+
+export const tokenRefresh = (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  const { refreshToken } = req.body;
+  //@ts-expect-error
+  jwt.verify(refreshToken, JWT_SECRET_KEY as Secret, (err, decoded) => {
+    if (err) {
+      return next(new HttpError("유효하지 않은 토큰입니다", 401));
+    }
+    const { userId } = decoded;
+    const accessToken = createAccToken(userId);
+    res.status(200).json({ accessToken });
   });
 };

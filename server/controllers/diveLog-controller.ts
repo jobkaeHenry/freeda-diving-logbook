@@ -9,8 +9,7 @@ export const createDiveLog = async (
   res: Response,
   next: NextFunction
 ) => {
-  const { diveType, location, weatherInfo, diveInfo, personal } =
-    req.body;
+  const { diveType, location, weatherInfo, diveInfo, personal } = req.body;
 
   const userId = req.userData?.userId;
 
@@ -64,7 +63,7 @@ export const getDiveLogById = async (
   const diveLogID = req.params.id;
   let diveLog;
   try {
-    diveLog = await DiveLog.findById(diveLogID);
+    diveLog = await DiveLog.findById(diveLogID).populate("author");
   } catch (err) {
     console.log(err);
     const error = new HttpError("오류가 발생했습니다", 500);
@@ -74,7 +73,10 @@ export const getDiveLogById = async (
     const error = new HttpError("존재하지 않는 로그입니다", 404);
     return next(error);
   }
-  res.json(diveLog.toObject({ getters: true }));
+  const { author, ...other } = diveLog.toObject({ getters: true });
+  // @ts-expect-error
+  const result = { ...other, author: diveLog.author.nickName };
+  res.json(result);
 };
 
 /** id(유저id)를 body로 받아가 가지고 있는 다이브 정보를 리턴*/
@@ -109,8 +111,7 @@ export const deleteDivelogById = async (
 ) => {
   const DivelogId = req.params.id;
   // 얘 바꾸삼
-  const userId = req.body.id;
-  // 유저검증부터
+  const userId = req.userData.userId;
 
   // 삭제할 애를 정함
   let targetDivelog;
@@ -124,8 +125,9 @@ export const deleteDivelogById = async (
     return next(new HttpError("존재하지 않는 로그입니다", 404));
   }
   // 권한확인
-  else if (targetDivelog.author !== userId) {
-    // return next(new HttpError("삭제 권한이 없습니다", 401));
+  // @ts-expect-error
+  else if (targetDivelog.author.id !== userId) {
+    return next(new HttpError("삭제 권한이 없습니다", 401));
   } else
     try {
       const session = await mongoose.startSession();
