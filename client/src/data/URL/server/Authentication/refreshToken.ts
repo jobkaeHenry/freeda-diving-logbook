@@ -1,1 +1,1 @@
-export const refreshTokenURL = "" as const
+export const refreshTokenURL = "/user/refresh" as const

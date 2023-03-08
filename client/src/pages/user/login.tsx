@@ -41,6 +41,7 @@ const Login = (props: Props) => {
       .post(login, data)
       .then((res) => {
         setLS("accessToken", res.data.accessToken);
+        setLS("refreshToken", res.data.refreshToken);
         if (window.history.length < 2) {
           router.replace("/");
         } else {
