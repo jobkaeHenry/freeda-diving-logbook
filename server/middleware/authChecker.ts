@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from "express";
 import HttpError from "../models/error";
 import jwt, { Secret } from "jsonwebtoken";
 import dotenv from "dotenv";
-import { TokenPayload } from "../src/@types/user";
+import { TokenPayload } from "../@types/user";
 
 dotenv.config();
 const JWT_SECRET_KEY = process.env.JWT_SECRET_KEY;
@@ -22,7 +22,7 @@ const authChecker = (req: Request, res: Response, next: NextFunction) => {
     req.userData = { userId: decodedToken.userId };
     next();
   } catch (err) {
-    next(new HttpError("토큰이 첨부되지 않았습니다", 400));
+    next(new HttpError("토큰이 올바르지 않습니다", 403));
   }
 };
 
