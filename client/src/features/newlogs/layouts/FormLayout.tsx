@@ -20,7 +20,7 @@ interface SelectiveInterface extends Props {
  * @returns True : 파라미터로 받은 Children / False : React.Fragment
  */
 const SelectiveRender = ({ validation, children }: SelectiveInterface) => {
-  return validation ? <>{children}</> : <></>;
+  return validation ? {children} : <></>;
 };
 
 FormLayout.Title = SectionHeading;
