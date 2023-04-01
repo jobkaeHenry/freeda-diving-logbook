@@ -66,8 +66,8 @@ const DiveForm = ({ existingData }: Props) => {
   );
 
   const onSubmit = useCallback(
-    (e: FormEvent) => {
-      e.preventDefault();
+    (event: FormEvent) => {
+      event.preventDefault();
       if (isLastStep) {
         axiosPrivate
           .post(createLogServer, data)
