@@ -3,7 +3,7 @@ import InputWithLabel from "@/components/atom/form/InputWithLabel";
 import { DiveLogTypes } from "@/types/DiveLogTypes";
 import { useTranslation } from "react-i18next";
 import DepthGraph from "../components/DepthGraph";
-import FormLayout from "../../../layouts/newlog/FormLayout";
+import FormLayout from "../layouts/FormLayout";
 import { RowWrapper } from "../../../layouts/Wrapper";
 
 type Props = Pick<DiveLogTypes, "diveInfo"> & {

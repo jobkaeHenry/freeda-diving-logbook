@@ -3,7 +3,7 @@ import Text from "@/components/atom/Text";
 import { DiveLogTypes } from "@/types/DiveLogTypes";
 import { useTranslation } from "next-i18next";
 import { ChangeEvent } from "react";
-import FormLayout from "../../../layouts/newlog/FormLayout";
+import FormLayout from "../layouts/FormLayout";
 
 type Props = Pick<DiveLogTypes, "diveType"> & {
   updateFields: (field: Pick<DiveLogTypes, "diveType">) => void;

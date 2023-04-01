@@ -4,7 +4,7 @@ import { ServerSideDiveLogType } from "@/types/DiveLogTypes";
 import { GetServerSideProps } from "next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "next-i18next";
-import LogsLayout from "@/layouts/newlog/LogsLayout";
+import LogsLayout from "@/features/newlogs/layouts/LogsLayout";
 import FixedMap from "@/services/GoogleMap/FixedMap";
 import Text from "@/components/atom/Text";
 import { ColumnWrapper, RowWrapper } from "@/layouts/Wrapper";
