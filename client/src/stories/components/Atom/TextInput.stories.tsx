@@ -1,12 +1,12 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import TextInput from '@/components/atom/TextInput';
+import TextInput from '@/components/atom/form/TextInput';
 
 
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
-  title: 'Components/Atom/TextInput',
+  title: 'Components/Atom/Form/TextInput',
   component: TextInput,
   // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
   // argTypes: {

@@ -1,7 +1,7 @@
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 import { InputHTMLAttributes, useId } from "react";
-import Text from "./Text";
+import Text from "../Text";
 
 interface Props
   extends Pick<

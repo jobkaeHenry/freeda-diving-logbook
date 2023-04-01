@@ -1,10 +1,10 @@
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
-import FileInput from "@/components/atom/FileInput";
+import FileInput from "@/components/atom/form/FileInput";
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
-  title: "Components/Atom/FileInput",
+  title: "Components/Atom/Form/FileInput",
   component: FileInput,
   // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
   argTypes: {

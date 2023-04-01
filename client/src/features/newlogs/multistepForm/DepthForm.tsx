@@ -1,5 +1,5 @@
 import Text from "@/components/atom/Text";
-import InputWithLabel from "@/components/form/InputWithLabel";
+import InputWithLabel from "@/components/atom/form/InputWithLabel";
 import { DiveLogTypes } from "@/types/DiveLogTypes";
 import { useTranslation } from "react-i18next";
 import DepthGraph from "../components/DepthGraph";

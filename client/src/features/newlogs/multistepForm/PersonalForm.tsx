@@ -1,7 +1,7 @@
-import FileInput from "@/components/atom/FileInput";
-import Radio from "@/components/atom/Radio";
+import FileInput from "@/components/atom/form/FileInput";
+import Radio from "@/components/atom/form/Radio";
 import Text from "@/components/atom/Text";
-import TextArea from "@/components/atom/TextArea";
+import TextArea from "@/components/atom/form/TextArea";
 import { DiveLogTypes } from "@/types/DiveLogTypes";
 import { useTranslation } from "react-i18next";
 import FormLayout from "../../../layouts/newlog/FormLayout";

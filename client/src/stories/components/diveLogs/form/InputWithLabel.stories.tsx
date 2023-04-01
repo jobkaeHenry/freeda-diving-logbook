@@ -1,6 +1,6 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import InputWithLabel from '@/components/form/InputWithLabel';
+import InputWithLabel from '@/components/atom/form/InputWithLabel';
 
 
 

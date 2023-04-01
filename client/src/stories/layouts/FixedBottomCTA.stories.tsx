@@ -1,7 +1,7 @@
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import FixedBottomCTA from "@/layouts/FixedBottomCTA";
-import { Button } from "@/components/atom/Button";
+import { Button } from "@/components/atom/form/Button";
 import Icon from "@/components/atom/Icon";
 import rightArrow from "@/assets/rightArrow.svg";
 

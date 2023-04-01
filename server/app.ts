@@ -67,5 +67,5 @@ mongoose
     app.listen(5000);
   })
   .catch((err) => {
-    console.log(`몽구스 에러 ${err}`);
+    console.log(`!!!몽구스 에러 ${err}`);
   });

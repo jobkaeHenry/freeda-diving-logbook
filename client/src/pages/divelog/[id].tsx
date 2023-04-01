@@ -12,7 +12,7 @@ import ValueWithTitle from "@/components/diveLogs/ValueWithTitle";
 import DepthGraph from "@/features/newlogs/components/DepthGraph";
 import AirUsageGraphic from "@/features/divelog/components/AirUsageGraphic";
 import Thermometer from "@/features/divelog/components/Thermometer";
-import { Button } from "@/components/atom/Button";
+import { Button } from "@/components/atom/form/Button";
 import useModal from "@/hooks/useModal";
 import QRCode from "react-qr-code";
 import { Modal } from "@/components/GlobalModal/Modal";

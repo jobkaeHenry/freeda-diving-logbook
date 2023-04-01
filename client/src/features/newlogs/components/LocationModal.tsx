@@ -1,4 +1,4 @@
-import TextInput from "@/components/atom/TextInput";
+import TextInput from "@/components/atom/form/TextInput";
 import useDebounce from "@/hooks/useDebounce";
 import styled from "@emotion/styled";
 import { useEffect, useState } from "react";

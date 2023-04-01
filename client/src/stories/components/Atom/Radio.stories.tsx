@@ -1,11 +1,11 @@
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
-import Radio from "../../../components/atom/Radio";
+import Radio from "../../../components/atom/form/Radio";
 import MobileWrapper from "../../../layouts/MobileWrapper";
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
-  title: "Components/Atom/Radio",
+  title: "Components/Atom/Form/Radio",
   component: Radio,
   // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
 } as ComponentMeta<typeof Radio>;

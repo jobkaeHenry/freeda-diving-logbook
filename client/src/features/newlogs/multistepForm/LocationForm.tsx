@@ -1,6 +1,6 @@
-import Radio from "@/components/atom/Radio";
+import Radio from "@/components/atom/form/Radio";
 import Text from "@/components/atom/Text";
-import TextInput from "@/components/atom/TextInput";
+import TextInput from "@/components/atom/form/TextInput";
 import SearchIcon from "@/assets/searchIcon.svg";
 import { DiveLogTypes } from "@/types/DiveLogTypes";
 import { useTranslation } from "react-i18next";
@@ -9,7 +9,7 @@ import { WeatherTypeGuard } from "../utils/typeguard";
 import useModal from "@/hooks/useModal";
 import { Modal } from "@/components/GlobalModal/Modal";
 import LocationModal from "../components/LocationModal";
-import InputWithLabel from "../../../components/form/InputWithLabel";
+import InputWithLabel from "../../../components/atom/form/InputWithLabel";
 import { ColumnWrapper, RowWrapper } from "../../../layouts/Wrapper";
 import FixedMap from "../../../services/GoogleMap/FixedMap";
 import { useSetRecoilState } from "recoil";

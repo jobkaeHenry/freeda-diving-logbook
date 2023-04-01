@@ -1,11 +1,10 @@
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
-import TextArea from "@/components/atom/TextArea";
-import { DefaultValue } from "./TextInput.stories";
+import TextArea from "@/components/atom/form/TextArea";
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
-  title: "Components/Atom/TextArea",
+  title: "Components/Atom/Form/TextArea",
   component: TextArea,
   // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
   argTypes: {

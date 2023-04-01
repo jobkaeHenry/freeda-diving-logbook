@@ -1,6 +1,6 @@
-import Checkbox from "@/components/atom/Checkbox";
+import Checkbox from "@/components/atom/form/Checkbox";
 import Text from "@/components/atom/Text";
-import InputWithLabel from "@/components/form/InputWithLabel";
+import InputWithLabel from "@/components/atom/form/InputWithLabel";
 import { DiveLogTypes } from "@/types/DiveLogTypes";
 import styled from "@emotion/styled";
 import { useState } from "react";

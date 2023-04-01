@@ -1,4 +1,4 @@
-import Radio from "@/components/atom/Radio";
+import Radio from "@/components/atom/form/Radio";
 import Text from "@/components/atom/Text";
 import { DiveLogTypes } from "@/types/DiveLogTypes";
 import { useTranslation } from "next-i18next";

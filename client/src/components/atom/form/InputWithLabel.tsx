@@ -1,6 +1,6 @@
-import TextInput, { TextInputProp } from "@/components/atom/TextInput";
+import TextInput, { TextInputProp } from "@/components/atom/form/TextInput";
 import Text from "@/components/atom/Text";
-import { RowWrapper } from "../../layouts/Wrapper";
+import { RowWrapper } from "../../../layouts/Wrapper";
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 import React from "react";

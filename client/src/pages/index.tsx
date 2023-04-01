@@ -1,4 +1,4 @@
-import { Button } from "@/components/atom/Button";
+import { Button } from "@/components/atom/form/Button";
 import Text from "../components/atom/Text";
 import { useRouter } from "next/router";
 import { newLogPage } from "@/data/URL/local/divelog/url";

@@ -1,6 +1,6 @@
-import Radio from "@/components/atom/Radio";
+import Radio from "@/components/atom/form/Radio";
 import Text from "@/components/atom/Text";
-import InputWithLabel from "@/components/form/InputWithLabel";
+import InputWithLabel from "@/components/atom/form/InputWithLabel";
 import { DiveLogTypes } from "@/types/DiveLogTypes";
 import { useTranslation } from "next-i18next";
 import FormLayout from "../../../layouts/newlog/FormLayout";
