@@ -13,11 +13,11 @@ export const WeatherTypeGuard = (
   e: React.ChangeEvent<HTMLInputElement>
 ): Pick<WeatherInterface, 'weather'> => {
   if (
-    e.target.value === 'sun' ||
-    e.target.value === 'rain' ||
-    e.target.value === 'fog' ||
-    e.target.value === 'snow'
+    e?.target?.value === 'sun' ||
+    e?.target?.value === 'rain' ||
+    e?.target?.value === 'fog' ||
+    e?.target?.value === 'snow'
   ) {
     return e.target.value as unknown as Pick<WeatherInterface, 'weather'>;
-  } else throw Error;
+  } else return 'sun' as unknown as Pick<WeatherInterface, 'weather'>;
 };
