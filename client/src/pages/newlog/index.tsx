@@ -1,20 +1,16 @@
 import { Button } from '@/components/atom/form/Button';
-import Navbar from '@/components/Navbar/Navbar';
 import FixedBottomCTA from '@/layouts/FixedBottomCTA';
 import { FormEvent, useCallback, useState } from 'react';
 import PaddingLayout from '@/layouts/PaddingLayout';
 import DiveTypeForm from '@/features/newlogs/multistepForm/DiveTypeForm';
 import useMultistepForm from '@/hooks/useMultistepForm';
-
 import LocationForm from '@/features/newlogs/multistepForm/LocationForm';
 import DepthForm from '@/features/newlogs/multistepForm/DepthForm';
 import AirUsageForm from '@/features/newlogs/multistepForm/AirUsageForm';
 import GearForm from '@/features/newlogs/multistepForm/GearForm';
 import PersonalForm from '@/features/newlogs/multistepForm/PersonalForm';
-
 import scubaDiveModel from '@/features/newlogs/data/scubaDiveModel';
 import { DiveLogTypes } from '@/types/DiveLogTypes';
-
 import { useRouter } from 'next/router';
 import { getDiveLogPage } from '@/data/URL/local/divelog/url';
 import { GetStaticPropsContext } from 'next';
@@ -22,6 +18,7 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useTranslation } from 'next-i18next';
 import { createLogServer } from '@/data/URL/server/newlog/createLog';
 import useAxiosPrivate from '@/hooks/useAxiosPrivate';
+import Navbar from '@/components/Navigation/Navbar';
 
 export async function getStaticProps(context: GetStaticPropsContext) {
   const locale = context.locale;
