@@ -51,12 +51,12 @@ const DiveForm = ({ existingData }: Props) => {
 
   const { step, isFirstStep, next, back, isLastStep } = useMultistepForm(
     [
-      <DiveTypeForm {...data} updateFields={updateField} />,
-      <LocationForm {...data} updateFields={updateField} />,
-      <DepthForm {...data} updateFields={updateField} />,
-      <AirUsageForm {...data} updateFields={updateField} />,
-      <GearForm {...data} updateFields={updateField} />,
-      <PersonalForm {...data} updateFields={updateField} />,
+      <DiveTypeForm {...data} updateFields={updateField} key={"DiveTypeForm"}/>,
+      <LocationForm {...data} updateFields={updateField} key={"LocationForm"}/>,
+      <DepthForm {...data} updateFields={updateField} key={"DepthForm"}/>,
+      <AirUsageForm {...data} updateFields={updateField} key={"AirUsageForm"}/>,
+      <GearForm {...data} updateFields={updateField} key={"GearForm"}/>,
+      <PersonalForm {...data} updateFields={updateField} key={"PersonalForm"}/>,
     ],
     // 서버측에서 받은 데이터가 있다면, 커스터마이징 부분으로 넘김
     existingData ? 3 : 0
