@@ -1,1 +1,1 @@
-export const freedaBaseURL = "http://183.109.40.144:3000" as const;
+export const freedaBaseURL = "http://192.168.0.5:3000" as const;

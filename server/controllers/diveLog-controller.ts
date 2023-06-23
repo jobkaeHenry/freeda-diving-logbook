@@ -75,7 +75,7 @@ export const getDiveLogById = async (
   }
   const { author, ...other } = diveLog.toObject({ getters: true });
   // @ts-expect-error
-  const result = { ...other, author: diveLog.author.nickName };
+  const result = { ...other, author: diveLog.author?.nickName };
   res.json(result);
 };
 

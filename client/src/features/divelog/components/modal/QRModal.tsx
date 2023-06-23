@@ -1,15 +1,14 @@
 import Text from "@/components/atom/Text";
 import styled from "@emotion/styled";
-import React from "react";
 import QRCode from "react-qr-code";
 
 type Props = {
-  value: string;
+  url: string;
   author: string;
 };
 
 const QRModal = (props: Props) => {
-  const { value, author } = props;
+  const { url, author } = props;
   return (
     <ModalWrapper>
       <Text
@@ -18,7 +17,7 @@ const QRModal = (props: Props) => {
         color={"var(--font-main)"}
       >{`'${author}' 님의 로그`}</Text>
       <QRWrapper>
-        <QRCode value={value ? value : ""} size={200} />
+        <QRCode value={url ? url : ""} size={200} />
       </QRWrapper>
     </ModalWrapper>
   );

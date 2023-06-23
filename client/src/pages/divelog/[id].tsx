@@ -39,7 +39,7 @@ const DiveLog = (props: Props) => {
           onClick={() =>
             onClickModal(
               <QRModal
-                value={`${freedaBaseURL}/${newLogPage}/${id}`}
+                url={`${freedaBaseURL}/${newLogPage}/${id}`}
                 author={data.author}
               />
             )

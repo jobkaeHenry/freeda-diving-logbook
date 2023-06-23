@@ -15,7 +15,7 @@ export default {
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
 const Template: ComponentStory<typeof FixedBottomCTA> = (args) => (
   <FixedBottomCTA {...args}>
-    <Button className="ghost">버튼1</Button>
+    <Button variant="ghost">버튼1</Button>
     <Button>
       버튼2
       <Icon url={rightArrow}/>

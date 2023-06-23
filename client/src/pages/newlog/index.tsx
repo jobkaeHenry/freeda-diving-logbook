@@ -72,7 +72,7 @@ const DiveForm = ({ existingData }: Props) => {
             router.replace(`${getDiveLogPage}/${res.data.id}`);
           })
           .catch((err) => {
-            console.log(err.response.data.message);
+            console.log(err?.response?.data?.message);
           });
       }
       next();
@@ -90,7 +90,7 @@ const DiveForm = ({ existingData }: Props) => {
           {/* 버튼 */}
           <FixedBottomCTA>
             {!isFirstStep ? (
-              <Button rounded className='ghost' onClick={back}>
+              <Button rounded variant='ghost' onClick={back}>
                 {t('이전')}
               </Button>
             ) : (

@@ -7,7 +7,7 @@ type ButtonType = React.DetailedHTMLProps<
 
 interface ButtonProps extends ButtonType {
   width?: string;
-  disabled?: boolean | undefined;
+  variant?: "default" | "ghost" | "disable";
   rounded?: boolean | undefined;
 }
 
@@ -20,16 +20,29 @@ export const Button = styled.button`
   padding: 12px 16px;
   border-radius: ${(props: ButtonProps) => (props.rounded ? "100px" : `8px`)};
   width: ${(props: ButtonProps) => (props.width ? props.width : `100%`)};
-  background-color: ${(props: ButtonProps) =>
-    props.disabled ? `var(--bg-gray)` : `var(--main)`};
-  color: var(--pure-white);
+  background-color: ${(props: ButtonProps) => {
+    switch(props.variant){
+      case "default": return `var(--main)`
+      case "ghost": return`var(--pure-white)`
+      case "disable": return`var(--bg-gray)`
+      default : return `var(--main)`
+    }
+  }};
+  color: ${(props: ButtonProps) => {
+    switch(props.variant){
+      case "default": return `var(--pure-white)`
+      case "ghost": return`var(--font-main)`
+      case "disable": return`var(--pure-white)`
+      default : return `var(--pure-white)`
+    }
+  }};
+    border: ${(props: ButtonProps) => {
+    switch(props.variant){
+      case "ghost": return `1px solid var(--line-gray)`
+      default : return ''
+    }
+  }};
   font-weight: var(--bold);
-
-  &.ghost {
-    color: var(--font-gray);
-    background-color: var(--pure-white);
-    border: 1px solid var(--line-gray);
-  }
 `;
 
 export const LinkButton = Button.withComponent("a");

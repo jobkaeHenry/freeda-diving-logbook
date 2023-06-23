@@ -7,7 +7,7 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import DiveForm from ".";
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
-  const locale = context.locale;
+  const {locale} = context;
   // 오버 패칭정보 제거
   const { id, _id, __v, author, ...data } = (
     await axios.get<ServerSideDiveLogType>(

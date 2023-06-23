@@ -25,7 +25,7 @@ Default.args = {
 };
 
 Ghost.args = {
-  className: "ghost",
+  variant: "ghost",
   children:"안녕하세요",
   rounded:false
 };
