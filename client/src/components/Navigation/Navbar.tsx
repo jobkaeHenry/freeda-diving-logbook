@@ -6,11 +6,13 @@ import { useRouter } from "next/router";
 
 type Props = {};
 
-const Navbar = (props: Props):JSX.Element => {
+const Navbar = (props: Props): JSX.Element => {
   const router = useRouter();
   return (
     <NavWrapper>
       <GoBack
+        style={{ cursor: "pointer" }}
+        role={'button'}
         onClick={() => {
           router.back();
         }}
