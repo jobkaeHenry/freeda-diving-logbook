@@ -12,8 +12,6 @@ import LocationModal from "../components/LocationModal";
 import InputWithLabel from "../../../components/atom/form/InputWithLabel";
 import { ColumnWrapper, RowWrapper } from "../../../layouts/Wrapper";
 import FixedMap from "../../../services/GoogleMap/FixedMap";
-import { useSetRecoilState } from "recoil";
-import { isModalOpenAtom } from "@/context/recoil/atom/globalModalAtom";
 
 type Props = Pick<DiveLogTypes, "location" | "weatherInfo" | "diveInfo"> & {
   updateFields: (
@@ -28,8 +26,7 @@ const LocationForm = ({
   updateFields,
 }: Props) => {
   const { t } = useTranslation(["diveForm", "common"]);
-  const onClickModal = useModal();
-  const setModalState = useSetRecoilState(isModalOpenAtom);
+  const { openModal, closeModal } = useModal();
 
   return (
     <FormLayout>
@@ -54,7 +51,18 @@ const LocationForm = ({
         >
           <FormLayout.Title>
             <ColumnWrapper noGap>
-              <Text typography="h1" bold onClick={() => setModalState(true)}>
+              <Text
+                typography="h1"
+                bold
+                onClick={() =>
+                  openModal(
+                    <LocationModal
+                      currentValue={location.title}
+                      updateFields={updateFields}
+                    />
+                  )
+                }
+              >
                 {location.title}
               </Text>
               <input
@@ -88,7 +96,7 @@ const LocationForm = ({
             placeholder={t("common:검색하기") || "Search"}
             value={location.title}
             onFocus={() =>
-              onClickModal(
+              openModal(
                 <LocationModal
                   currentValue={location.title}
                   updateFields={updateFields}

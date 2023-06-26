@@ -2,29 +2,23 @@ import { isModalOpenAtom, modalComponentAtom } from "@/context/recoil/atom/globa
 import useWindowSize from "@/hooks/useWindowSize";
 
 import styled from "@emotion/styled";
-import { useEffect } from "react";
 import { useRecoilValue, useRecoilState } from "recoil";
 import Portal from "./Portal";
+import useModal from "@/hooks/useModal";
 
 export const Modal = () => {
   const modalElem = useRecoilValue(modalComponentAtom);
-  const [isModalOpen, setIsModalOpen] = useRecoilState(isModalOpenAtom);
+  const [isModalOpen, _setIsModalOpen] = useRecoilState(isModalOpenAtom);
   // 윈도우사이즈(모바일에서 상단, 하단바를 제외한 실제 크기)
   const { height } = useWindowSize();
-
-  useEffect(() => {
-    return () => {
-      window.removeEventListener("popstate", () => setIsModalOpen(false));
-    };
-  }, []);
+  const {closeModal} = useModal()
 
   return isModalOpen ? (
     <Portal>
       <ModalBackDrop
         height={height}
         onClick={() => {
-          history.back();
-          setIsModalOpen(false);
+          closeModal()
         }}
       >
         <ModalWrapper
@@ -32,7 +26,6 @@ export const Modal = () => {
             e.stopPropagation();
           }}
         >
-          {/* <Button onClick={() => setIsModalOpen((prev) => !prev)} /> */}
           {modalElem}
         </ModalWrapper>
       </ModalBackDrop>

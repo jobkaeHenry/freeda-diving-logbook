@@ -6,8 +6,7 @@ import SearchIcon from "@/assets/searchIcon.svg";
 import Text from "@/components/atom/Text";
 import { css } from "@emotion/react";
 import { DiveLogTypes } from "@/types/DiveLogTypes";
-import { useSetRecoilState } from "recoil";
-import { isModalOpenAtom } from "@/context/recoil/atom/globalModalAtom";
+import useModal from "@/hooks/useModal";
 
 type Props = {
   currentValue: string;
@@ -16,7 +15,7 @@ type Props = {
 
 const LocationModal = (props: Props) => {
   const { currentValue, updateFields } = props;
-  const setModalState = useSetRecoilState(isModalOpenAtom)
+  const { closeModal } = useModal();
 
   const [value, setValue] = useState(currentValue ? currentValue : "");
   const [place, setPlace] =
@@ -67,7 +66,7 @@ const LocationModal = (props: Props) => {
                     lat: lat,
                   },
                 });
-                setModalState(false)
+                closeModal();
               }}
             >
               <Text typography={"h3"} bold css={WordBreak}>
