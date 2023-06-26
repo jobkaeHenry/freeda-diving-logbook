@@ -19,6 +19,7 @@ import { useTranslation } from 'next-i18next';
 import { createLogServer } from '@/data/URL/server/newlog/createLog';
 import useAxiosPrivate from '@/hooks/useAxiosPrivate';
 import Navbar from '@/components/Navigation/Navbar';
+import Head from 'next/head';
 
 export async function getStaticProps(context: GetStaticPropsContext) {
   const locale = context.locale;
@@ -82,6 +83,9 @@ const DiveForm = ({ existingData }: Props) => {
 
   return (
     <>
+    <Head>
+      <title>Freeda | 새 로그</title>
+    </Head>
       <Navbar />
       <PaddingLayout>
         <form onSubmit={onSubmit}>

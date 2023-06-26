@@ -34,7 +34,6 @@ const DiveTypeForm = (props: Props) => {
           <Radio.Option value={"free"}>{t("common:프리다이빙")}</Radio.Option>
         </Radio>
       </FormLayout.Main>
-      
     </FormLayout>
   );
 };

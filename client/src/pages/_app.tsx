@@ -3,16 +3,20 @@ import "@/styles/globals.css";
 import type { AppProps } from "next/app";
 import { appWithTranslation } from "next-i18next";
 import { RecoilRoot } from "recoil";
+import Head from "next/head";
 
 function App({ Component, pageProps }: AppProps) {
   return (
-    
-    <RecoilRoot>
-      <DefaultLayout>
-        <Component {...pageProps} />
-      </DefaultLayout>
-    </RecoilRoot>
-
+    <>
+      <Head>
+        <title>Freeda</title>
+      </Head>
+      <RecoilRoot>
+        <DefaultLayout>
+          <Component {...pageProps} />
+        </DefaultLayout>
+      </RecoilRoot>
+    </>
   );
 }
 export default appWithTranslation(App);

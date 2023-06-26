@@ -1,11 +1,11 @@
 import { Button } from "@/components/atom/form/Button";
-import MobileWrapper from "@/layouts/MobileWrapper";
 import { ColumnWrapper } from "@/layouts/Wrapper";
-import styled from "@emotion/styled";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import Text from "@/components/atom/Text";
+import Image from "next/image";
+import logo100 from '@/assets/logo100.jpg'
 
 const NotFoundPage = () => {
   const [timer, setTimer] = useState(5);
@@ -26,7 +26,7 @@ const NotFoundPage = () => {
   return (
     <ColumnWrapper style={{ alignItems: "center" }}>
       <Link href={"/"}>
-        <Logo src={"logo"} alt="로고" />
+        <Image src={logo100} width={100} height={100} alt="logo image"></Image>
       </Link>
       <Text typography="h3">존재하지않는 페이지입니다</Text>
       <Text typography="p">{timer}초 후 메인페이지로 이동합니다</Text>
@@ -36,8 +36,4 @@ const NotFoundPage = () => {
     </ColumnWrapper>
   );
 };
-const Logo = styled.img`
-  width: 150px;
-  height: 150px;
-`;
 export default NotFoundPage;
