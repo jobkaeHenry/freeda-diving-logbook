@@ -10,6 +10,7 @@ const MobileWrapper = styled.div`
   padding: 16px;
   display: flex;
   flex-direction: column;
+  position: static;
   gap: 16px;
 `;
 
