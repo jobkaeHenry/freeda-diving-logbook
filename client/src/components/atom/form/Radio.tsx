@@ -8,8 +8,10 @@ import React, {
   useState,
 } from "react";
 import styled from "@emotion/styled";
+import { motion } from "framer-motion";
 
-import { useUID } from "react-uid/dist/es5/hooks";
+import { uid } from "react-uid";
+import { css } from "@emotion/react";
 
 interface Props
   extends Pick<
@@ -47,7 +49,9 @@ const ControlledRadio = ({ children, value, onChange, name }: Props) => {
     },
     [onChange]
   );
-  const id = useUID();
+  const id = uid('radio');
+  const checkedIndex = children.findIndex((e) => e.props.value === value);
+
   return (
     <RadioWrapper>
       {children.map((element, index) => {
@@ -59,9 +63,29 @@ const ControlledRadio = ({ children, value, onChange, name }: Props) => {
           name: name ?? id,
         });
       })}
+      <motion.div
+        css={selectedBox}
+        initial={{ translateX: `${checkedIndex * 100}%` }}
+        animate={{
+          translateX: `${checkedIndex * 100}%`,
+        }}
+        transition={{ type: "spring", stiffness: 300, damping: 30, mass: 1 }}
+        style={{ width: `calc((100% - 8px) / ${children.length})` }}
+      ></motion.div>
     </RadioWrapper>
   );
 };
+
+const selectedBox = css`
+  background-color: var(--pure-white);
+  border-radius: 8px;
+  position: absolute;
+  width: 50%;
+  top: 4px;
+  left: 4px;
+  z-index: 0;
+  bottom: 4px;
+`;
 
 interface RadioOptionProps
   extends Omit<InputHTMLAttributes<HTMLInputElement>, "type"> {}
@@ -74,39 +98,38 @@ const RadioOption = ({
   children,
   ...others
 }: RadioOptionProps) => {
-  const id = useUID();
   return (
-    <LabelWrapper>
+    <RadioLabel>
       <input
         type={"radio"}
         className={"visually-none"}
         checked={checked}
-        id={id}
         name={name}
         value={value}
         onChange={onChange}
         {...others}
       />
-      <label htmlFor={id}>{children}</label>
-    </LabelWrapper>
+      <span>{children}</span>
+    </RadioLabel>
   );
 };
 
-const LabelWrapper = styled.div`
+const RadioLabel = styled.label`
   width: 100%;
+  display: flex;
+  padding: 10px;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+  font-weight: var(--medium);
+  cursor: pointer;
 
-  & label {
-    display: flex;
-    padding: 10px;
-    text-align: center;
-    justify-content: center;
-    align-items: center;
-    border-radius: 8px;
-    font-weight: var(--medium);
+  & > span {
     color: var(--font-gray);
   }
-  & input:checked + label {
-    background-color: var(--pure-white);
+
+  & input:checked + span {
+    font-weight: var(--bold);
     color: var(--font-black);
   }
 `;
@@ -118,6 +141,7 @@ const RadioWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
 `;
 
 Radio.Option = RadioOption;
