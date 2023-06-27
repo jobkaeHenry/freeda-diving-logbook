@@ -1,5 +1,5 @@
 import { DiveLogTypes, ServerSideDiveLogType } from "@/types/DiveLogTypes";
-import axios, { axiosPrivate } from "@/lib/api/axios";
+import axios from "@/lib/api/axios";
 import { getDiveLogPage } from "@/data/URL/local/divelog/url";
 import { GetServerSidePropsContext } from "next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";

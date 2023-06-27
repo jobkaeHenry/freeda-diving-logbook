@@ -11,7 +11,7 @@ import { GetStaticPropsContext } from "next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useRouter } from "next/router";
 import { login, signUp } from "@/data/URL/local/user/url";
-import { useForm, Resolver, SubmitHandler } from "react-hook-form";
+import { useForm, SubmitHandler } from "react-hook-form";
 import { emailRegExp, passwordRegExp } from "@/utils/regExp";
 import { axiosPrivate } from "@/lib/api/axios";
 import { setLS } from "@/utils/localStorage";
