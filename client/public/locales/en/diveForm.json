@@ -1,7 +1,13 @@
 {
-  "어떤 활동을 하셨나요?": "What kind of dive have you done?",
-  "어디에서 활동하셨나요?" : "Where did you dive?",
-  "어떤 장비를 사용하셨나요?" : "What gears did you use?",
-  "다이빙은 어떠셨나요?":"How was the dive?",
-  "아슬아슬하게 상승하신거 같아요":"How about ascend early next time?"
+  "어떤 활동을 하셨나요?": "What type of diving did you do?",
+  "어디에서 활동하셨나요?": "Where did you engage in the activity?",
+  "어떤 장비를 사용하셨나요?": "What equipment did you use?",
+  "다이빙은 어떠셨나요?": "How was the diving?",
+  "아슬아슬하게 상승하신거 같아요": "It seems like you ascended narrowly, how about ascending early next time?",
+  "버디와 함께 참여하셨나요?": "Did you dive with a buddy?",
+
+  "QR코드 스캔하기": "Scan the QR code",
+  "QR코드 스캔을 통해 편하게 작성해보세요": "Conveniently fill out by scanning the QR code",
+  "직접 작성하기": "Fill out yourself",
+  "버디가 작성한 정보를 사용할게요":"I'll use buddy's divelog"
 }

@@ -42,7 +42,7 @@
   "Semi": "Semi",
   "Skin": "Skin",
 
-  "체감수온": "Feel like temperature",
+  "체감수온": "Apparent temperature",
   "체감시야": "Visibility",
 
   "적당함": "Warm",
@@ -52,4 +52,6 @@
   "좋음": "Good",
   "보통": "Normal",
   "나쁨": "Bad"
+
+  
 }
