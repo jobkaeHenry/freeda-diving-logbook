@@ -20,6 +20,7 @@ import { createLogServer } from '@/data/URL/server/newlog/createLog';
 import useAxiosPrivate from '@/hooks/useAxiosPrivate';
 import Navbar from '@/components/Navigation/Navbar';
 import Head from 'next/head';
+import FormIndex from '@/features/newlogs/multistepForm/DiveFormIndex';
 
 export async function getStaticProps(context: GetStaticPropsContext) {
   const locale = context.locale;
@@ -52,6 +53,7 @@ const DiveForm = ({ existingData }: Props) => {
 
   const { step, isFirstStep, next, back, isLastStep } = useMultistepForm(
     [
+      <FormIndex {...data} key={'FormIndex'}/>,
       <DiveTypeForm {...data} updateFields={updateField} key={"DiveTypeForm"}/>,
       <LocationForm {...data} updateFields={updateField} key={"LocationForm"}/>,
       <DepthForm {...data} updateFields={updateField} key={"DepthForm"}/>,
@@ -109,5 +111,6 @@ const DiveForm = ({ existingData }: Props) => {
     </>
   );
 };
+
 
 export default DiveForm;

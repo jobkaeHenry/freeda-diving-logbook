@@ -8,27 +8,43 @@ import PaddingLayout from "@/layouts/PaddingLayout";
 import ViewFinder from "@/layouts/ViewFinder";
 import Navbar from "@/components/Navigation/Navbar";
 import { newLogPage } from "@/data/URL/local/divelog/url";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { GetStaticPropsContext } from "next";
+import { useTranslation } from "next-i18next";
 
-type Props = {};
+type Props = {
+  locale: string | undefined;
+};
 
+export async function getStaticProps(context: GetStaticPropsContext) {
+  const locale = context.locale;
+  return {
+    props: {
+      ...(await serverSideTranslations(locale ? locale : "en", [
+        "common",
+        "diveForm",
+      ])),
+      locale,
+    },
+  };
+}
 const QRScan = (props: Props) => {
   const router = useRouter();
+  const { t } = useTranslation(["diveForm", "common"]);
   return (
     <PaddingLayout>
       <Navbar></Navbar>
       <SectionHeading>
         <Text typography="h2" bold>
-          QR스캔하기
+          {t("QR코드 스캔하기")}
         </Text>
-        QR코드 스캔을 통해 편하게 작성해보세요
+        {t("QR코드 스캔을 통해 편하게 작성해보세요")}
       </SectionHeading>
 
       <QrReader
         constraints={{ facingMode: "environment" }}
         onResult={(result, _error) => {
           if (!!result) {
-            console.log('!!!!!!!')
-            console.log(result.getText())
             router.replace(result.getText());
           }
         }}
@@ -52,7 +68,7 @@ const QRScan = (props: Props) => {
 
       <FixedBottomCTA>
         <Button onClick={() => router.push(newLogPage)} variant="ghost">
-          직접 작성하기
+          {t("직접 작성하기")}
         </Button>
       </FixedBottomCTA>
     </PaddingLayout>
