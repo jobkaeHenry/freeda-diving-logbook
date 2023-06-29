@@ -5,7 +5,7 @@ type IconProps = {
   size?: number;
 };
 
-const Icon = styled.button`
+const Icon = styled.i`
   width: ${(props: IconProps) =>
     props.size ? String(props.size) : "16"}px;
   height: ${(props: IconProps) =>
