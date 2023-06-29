@@ -31,9 +31,10 @@ export async function getStaticProps(context: GetStaticPropsContext) {
 const QRScan = (props: Props) => {
   const router = useRouter();
   const { t } = useTranslation(["diveForm", "common"]);
+
   return (
     <PaddingLayout>
-      <Navbar></Navbar>
+      <Navbar/>
       <SectionHeading>
         <Text typography="h2" bold>
           {t("QR코드 스캔하기")}
@@ -42,13 +43,14 @@ const QRScan = (props: Props) => {
       </SectionHeading>
 
       <QrReader
+
         constraints={{ facingMode: "environment" }}
         onResult={(result, _error) => {
           if (!!result) {
             router.replace(result.getText());
           }
         }}
-        videoStyle={{ "object-fit": "cover" }}
+        videoStyle={{ objectFit: "cover" }}
         containerStyle={{
           display: "flex",
           alignItems: "center",
